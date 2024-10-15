@@ -1,0 +1,17 @@
+.header {
+    background-color: #1c1c1c; /* Color de fondo oscuro */
+    color: #ffffff; /* Color de texto blanco */
+    text-align: center; /* Centrar el texto */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+}
+
+.nav-menu a {
+    color: white;
+    padding: 10px 15px; /* Espaciado alrededor del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.nav-menu a:hover {
+    color: #ffd700;
+}
