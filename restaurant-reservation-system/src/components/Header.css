@@ -2,16 +2,38 @@
     background-color: #1c1c1c; /* Color de fondo oscuro */
     color: #ffffff; /* Color de texto blanco */
     text-align: center; /* Centrar el texto */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra más suave y difusa para profundidad */
+}
+
+.logo {
+    height: 135px; /* Altura ajustable para el logo */
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: center; /* Centrar los enlaces en el menú */
+}
+
+.nav-menu ul {
+    display: flex;
+    list-style: none; /* Sin puntos en la lista */
+    padding: 0; /* Sin padding */
+    margin: 0; /* Sin margin */
 }
 
 .nav-menu a {
-    color: white;
-    padding: 10px 15px; /* Espaciado alrededor del texto */
-    border-radius: 5px; /* Bordes redondeados */
-    transition: background-color 0.3s ease; /* Transición suave */
+    color: white; /* Color de los enlaces */
+    padding: 12px 20px; /* Espaciado alrededor del texto */
+    border-radius: 8px; /* Bordes más redondeados */
+    text-transform: uppercase; /* Texto en mayúsculas para un aspecto más elegante */
+    font-weight: 500; /* Peso de fuente más audaz */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    margin: 0 5px; /* Espaciado entre los enlaces */
+    font-size: large;
 }
 
 .nav-menu a:hover {
-    color: #ffd700;
+    background-color:#F2CE16; /* Fondo sutil al pasar el ratón */
+    color: #000000; /* Color dorado al pasar el mouse */
+    transform: scale(1.10); /* Aumentar un poco el tamaño al pasar el mouse */
 }

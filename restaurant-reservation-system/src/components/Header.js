@@ -1,49 +1,62 @@
-import React from 'react';
-import './Header.css';
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { FaHome, FaUtensils, FaCalendarAlt, FaPhone } from 'react-icons/fa'; 
-
+import React from "react";
+import { AppBar, Toolbar, Box } from "@mui/material";
+import { Link } from "react-router-dom";
+import { FaHome, FaUtensils, FaCalendarAlt, FaUserCircle, FaPhone } from "react-icons/fa";
+import logo from "../images/logo.png";
+import "./Header.css";
 
 const Header = () => {
   return (
-    <AppBar position="static" className="header">
+    <AppBar position="static" className="header"      sx={{
+        backgroundColor: "#1c1c1c", 
+        color: "white", 
+      }}>
       <Toolbar>
-        <Typography
-          variant="h6"
-          className="logo"
+        <Box
           component={Link}
           to="/"
-          sx={{ flexGrow: 1, textDecoration: 'none', color: 'inherit' }}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            textDecoration: "none",
+            color: "inherit",
+            flexGrow: 1,
+          }}
         >
-          Mi Restaurante
-        </Typography>
+          <img
+            src={logo}
+            alt="Logo"
+            className="logo" 
+          />
+        </Box>
         <Box className="nav-menu">
-          <ul style={{ display: 'flex', listStyle: 'none', padding: 0 }}>
-            <li style={{ margin: '0 1rem' }}>
-              <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center' }}>
-                <FaHome style={{ marginRight: '0.5rem' }} /> Inicio
+          <ul>
+            <li>
+              <Link to="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+                <FaHome style={{ marginRight: "0.5rem" }} /> Inicio
               </Link>
             </li>
-            <li style={{ margin: '0 1rem' }}>
-              <Link to="/menu" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center' }}>
-                <FaUtensils style={{ marginRight: '0.5rem' }} /> Menú
+            <li>
+              <Link to="/menu" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+                <FaUtensils style={{ marginRight: "0.5rem" }} /> Menú
               </Link>
             </li>
-            <li style={{ margin: '0 1rem' }}>
-              <Link to="/reservations" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center' }}>
-                <FaCalendarAlt style={{ marginRight: '0.5rem' }} /> Reservas
+            <li>
+              <Link to="/reservations" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+                <FaCalendarAlt style={{ marginRight: "0.5rem" }} /> Reservas
               </Link>
             </li>
-            <li style={{ margin: '0 1rem' }}>
-              <Link to="/contact" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center' }}>
-                <FaPhone style={{ marginRight: '0.5rem' }} /> Contacto
+            <li>
+              <Link to="/contact" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+                <FaPhone style={{ marginRight: "0.5rem" }} /> Contacto
+              </Link>
+            </li>
+            <li>
+              <Link to="/user" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+                <FaUserCircle style={{ marginRight: "0.5rem" }} /> Iniciar Sesión
               </Link>
             </li>
           </ul>
-        </Box>
-        <Box className="user-options">
-          <Button color="inherit" component={Link} to="/login">Iniciar Sesión</Button>
         </Box>
       </Toolbar>
     </AppBar>
