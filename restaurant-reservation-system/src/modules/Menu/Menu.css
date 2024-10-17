@@ -1,0 +1,78 @@
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+  justify-items: center; /* Centra los elementos de la cuadrícula horizontalmente */
+}
+
+.menu-item {
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: transform 0.2s;
+  display: flex; /* Para centrar el contenido */
+  flex-direction: column; /* Para apilar el contenido verticalmente */
+  align-items: center; /* Centra horizontalmente el contenido */
+  justify-content: center; /* Centra verticalmente el contenido dentro de menu-item */
+}
+
+.menu-item:hover {
+  transform: scale(1.05);
+}
+
+.menu-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: white; /* Fondo blanco para el modal */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+}
+
+.modal-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.home-title {
+  font-size: 3rem;
+  color: #000000;
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Centra el texto del título */
+}
+
+.home-description {
+  font-size: 1.3rem;
+  color: #7f8c8d;
+  margin-bottom: 40px;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  text-align: center; /* Centra el texto de la descripción */
+}
