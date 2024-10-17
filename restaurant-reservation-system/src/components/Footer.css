@@ -10,7 +10,8 @@
 .footer-title {
   color:#F2CE16; /* Color dorado para los títulos */
   text-transform: uppercase; /* Texto en mayúsculas para un aspecto más elegante */
-  font-family: 'Lora', serif; 
+  font-family: 'Montserrat', sans-serif; /* Usar Montserrat */
+  font-weight: 500; /* Peso Medium de Montserrat */
 }
 
 .footer-text {
