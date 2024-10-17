@@ -1,77 +1,77 @@
 .App {
-  text-align: center; /* Centrar texto */
+  text-align: center; 
 }
 
 .App-logo {
-  height: 40vmin; /* Altura proporcional */
-  pointer-events: none; /* Desactivar interacciones */
-  margin-bottom: 20px; /* Espacio debajo del logo */
+  height: 40vmin; 
+  pointer-events: none; 
+  margin-bottom: 20px; 
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear; /* Animación del logo */
+    animation: App-logo-spin infinite 20s linear; 
   }
 }
 
 .App-header {
-  background-color: #1c1c1c; /* Color de fondo del header */
-  min-height: 100vh; /* Altura mínima */
-  display: flex; /* Flexbox para centrar contenido */
+  background-color: #1c1c1c; 
+  min-height: 100vh; 
+  display: flex; 
   flex-direction: column;
-  align-items: center; /* Alinear elementos al centro */
-  justify-content: center; /* Justificar contenido al centro */
-  font-size: calc(10px + 2vmin); /* Tamaño de fuente adaptable */
-  color: white; /* Color de texto blanco */
-  padding: 20px; /* Espaciado adicional */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+  align-items: center; 
+  justify-content: center; 
+  font-size: calc(10px + 2vmin); 
+  color: white;
+  padding: 20px; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
 }
 
 .App-link {
-  color: #61dafb; /* Color de los enlaces */
-  transition: color 0.3s ease; /* Transición suave */
+  color: #61dafb; 
+  transition: color 0.3s ease; 
 }
 
 .App-link:hover {
-  color: #ffd700; /* Cambiar color al pasar el ratón */
+  color: #ffd700; 
 }
 
 @keyframes App-logo-spin {
   from {
-    transform: rotate(0deg); /* Rotación inicial */
+    transform: rotate(0deg); 
   }
   to {
-    transform: rotate(360deg); /* Rotación final */
+    transform: rotate(360deg);
   }
 }
 
 body {
-  font-family: 'Roboto', sans-serif; /* Fuente */
-  margin: 0; /* Sin margen */
-  padding: 0; /* Sin padding */
-  background-color: #b6b0b0; /* Color de fondo claro */
-  color: #333; /* Color de texto por defecto */
+  font-family: 'Roboto', sans-serif; 
+  margin: 0; 
+  padding: 0; 
+  background-color: #b6b0b0; 
+  color: #333; 
 }
 
 a {
-  text-decoration: none; /* Sin subrayado */
-  color: inherit; /* Color heredado */
+  text-decoration: none; 
+  color: inherit; 
 }
 
 footer {
-  background-color: #1c1c1c; /* Color de fondo oscuro */
-  color: #ffffff; /* Color de texto blanco */
-  padding: 20px; /* Ajustar el espaciado superior e inferior */
-  text-align: center; /* Centrar el texto */
-  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+  background-color: #1c1c1c; 
+  color: #ffffff; 
+  padding: 20px;
+  text-align: center; 
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2); 
 }
 
 footer p {
-  margin: 10px 0; /* Ajusta según sea necesario */
-  font-size: 0.9rem; /* Tamaño de fuente para los párrafos */
+  margin: 10px 0; 
+  font-size: 0.9rem; 
 }
 
 .footer-copy {
-  font-size: 0.9rem; /* Tamaño de fuente para el copyright */
-  margin-top: 20px; /* Margen superior */
+  font-size: 0.9rem; 
+  margin-top: 20px; 
 }

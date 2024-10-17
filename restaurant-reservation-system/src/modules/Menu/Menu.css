@@ -12,10 +12,10 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   transition: transform 0.2s;
-  display: flex; /* Para centrar el contenido */
-  flex-direction: column; /* Para apilar el contenido verticalmente */
-  align-items: center; /* Centra horizontalmente el contenido */
-  justify-content: center; /* Centra verticalmente el contenido dentro de menu-item */
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
 }
 
 .menu-item:hover {
@@ -44,9 +44,9 @@
   max-width: 600px;
   margin: auto;
   padding: 20px;
-  background-color: white; /* Fondo blanco para el modal */
-  border-radius: 15px; /* Bordes redondeados */
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+  background-color: white; 
+  border-radius: 15px; 
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); 
 }
 
 .modal-image {
@@ -63,7 +63,7 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Centra el texto del título */
+  text-align: center; 
 }
 
 .home-description {
@@ -74,5 +74,5 @@
   line-height: 1.6;
   max-width: 800px;
   margin: 0 auto 40px;
-  text-align: center; /* Centra el texto de la descripción */
+  text-align: center; 
 }

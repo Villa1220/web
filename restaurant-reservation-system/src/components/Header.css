@@ -1,39 +1,39 @@
 .header {
-    background-color: #1c1c1c; /* Color de fondo oscuro */
-    color: #ffffff; /* Color de texto blanco */
-    text-align: center; /* Centrar el texto */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra más suave y difusa para profundidad */
+    background-color: #1c1c1c; 
+    color: #ffffff; 
+    text-align: center; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
 }
 
 .logo {
-    height: 135px; /* Altura ajustable para el logo */
+    height: 135px; 
 }
 
 .nav-menu {
     display: flex;
-    justify-content: center; /* Centrar los enlaces en el menú */
+    justify-content: center; 
 }
 
 .nav-menu ul {
     display: flex;
-    list-style: none; /* Sin puntos en la lista */
-    padding: 0; /* Sin padding */
-    margin: 0; /* Sin margin */
+    list-style: none;
+    padding: 0; 
+    margin: 0; 
 }
 
 .nav-menu a {
-    color: white; /* Color de los enlaces */
-    padding: 12px 20px; /* Espaciado alrededor del texto */
-    border-radius: 8px; /* Bordes más redondeados */
-    text-transform: uppercase; /* Texto en mayúsculas para un aspecto más elegante */
-    font-weight: 500; /* Peso de fuente más audaz */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
-    margin: 0 5px; /* Espaciado entre los enlaces */
+    color: white; 
+    padding: 12px 20px; 
+    border-radius: 8px; 
+    text-transform: uppercase; 
+    font-weight: 500; 
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+    margin: 0 5px; 
     font-size: large;
 }
 
 .nav-menu a:hover {
-    background-color:#F2CE16; /* Fondo sutil al pasar el ratón */
-    color: #000000; /* Color dorado al pasar el mouse */
-    transform: scale(1.10); /* Aumentar un poco el tamaño al pasar el mouse */
+    background-color:#F2CE16; 
+    color: #000000; 
+    transform: scale(1.10); 
 }
