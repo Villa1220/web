@@ -8,6 +8,8 @@ import Contact from './modules/Contact';
 import User from './modules/User';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Login from './modules/User/Login'; // Nuevo import
+import Register from './modules/User/Register'; // Nuevo import
 
 function App() {
   return (
@@ -20,7 +22,8 @@ function App() {
           <Route path="/reservations" element={<Reservations />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/user" element={<User />} />
+          <Route path="/user" element={<Login />} />
+          <Route path="/register" element={<Register />} /> {/* Nueva ruta */}
         </Routes>
         <Footer />
       </div>
