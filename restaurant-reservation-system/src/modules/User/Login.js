@@ -1,23 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './User.css';
 import BASE_URL from '../../config';
 import { Link } from 'react-router-dom';
-
+import { UserContext } from '../../context/UserContext'; // Importa el contexto
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext); // Obtiene la función para establecer el usuario
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(`${BASE_URL}/auth/login`, { email, password });
       localStorage.setItem('token', response.data.token); // Guarda el token en localStorage
-      navigate('/'); // Redirige a la página principal o a la que elijas
+      setUser({ email: email, name: response.data.name }); // Guarda el usuario en el contexto
+      navigate('/user'); // Redirige a la página de usuario
     } catch (err) {
       setError('Credenciales inválidas');
     }

@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Login from './modules/User/Login'; // Nuevo import
 import Register from './modules/User/Register'; // Nuevo import
 
+
 function App() {
   return (
     <Router>

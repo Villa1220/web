@@ -1,33 +1,19 @@
-import React from "react";
-import { AppBar, Toolbar, Box } from "@mui/material";
-import { Link } from "react-router-dom";
-import { FaHome, FaUtensils, FaCalendarAlt, FaUserCircle, FaPhone } from "react-icons/fa";
-import logo from "../images/logo.png";
-import "./Header.css";
+import React, { useContext } from 'react';
+import { AppBar, Toolbar, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { FaHome, FaUtensils, FaCalendarAlt, FaUserCircle, FaPhone } from 'react-icons/fa';
+import logo from '../images/logo.png';
+import './Header.css';
+import { UserContext } from '../context/UserContext'; // Importa el contexto
 
 const Header = () => {
+  const { user } = useContext(UserContext); // Obtiene el usuario del contexto
+
   return (
-    <AppBar position="static" className="header"      sx={{
-        backgroundColor: "#1c1c1c", 
-        color: "white", 
-      }}>
+    <AppBar position="static" className="header" sx={{ backgroundColor: "#1c1c1c", color: "white" }}>
       <Toolbar>
-        <Box
-          component={Link}
-          to="/"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            textDecoration: "none",
-            color: "inherit",
-            flexGrow: 1,
-          }}
-        >
-          <img
-            src={logo}
-            alt="Logo"
-            className="logo" 
-          />
+        <Box component={Link} to="/" sx={{ display: "flex", alignItems: "center", textDecoration: "none", color: "inherit", flexGrow: 1 }}>
+          <img src={logo} alt="Logo" className="logo" />
         </Box>
         <Box className="nav-menu">
           <ul>
@@ -51,11 +37,19 @@ const Header = () => {
                 <FaPhone style={{ marginRight: "0.5rem" }} /> Contacto
               </Link>
             </li>
-            <li>
-              <Link to="/user" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
-                <FaUserCircle style={{ marginRight: "0.5rem" }} /> Iniciar Sesión
-              </Link>
-            </li>
+            {user ? (
+              <li>
+                <Link to="/user" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+                  <FaUserCircle style={{ marginRight: "0.5rem" }} /> Bienvenido, {user.email}
+                </Link>
+              </li>
+            ) : (
+              <li>
+                <Link to="/user" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+                  <FaUserCircle style={{ marginRight: "0.5rem" }} /> Iniciar Sesión
+                </Link>
+              </li>
+            )}
           </ul>
         </Box>
       </Toolbar>
