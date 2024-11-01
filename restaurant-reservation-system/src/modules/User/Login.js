@@ -1,20 +1,32 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './User.css';
+import BASE_URL from '../../config';
+import { Link } from 'react-router-dom';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Lógica para el manejo del login (validación y llamada al backend)
-    console.log('Email:', email, 'Password:', password);
+    try {
+      const response = await axios.post(`${BASE_URL}/auth/login`, { email, password });
+      localStorage.setItem('token', response.data.token); // Guarda el token en localStorage
+      navigate('/'); // Redirige a la página principal o a la que elijas
+    } catch (err) {
+      setError('Credenciales inválidas');
+    }
   };
 
   return (
     <div className="login-container">
       <h2 className="login-title">Iniciar Sesión</h2>
+      {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleLogin} className="login-form">
         <div className="form-group">
           <label htmlFor="email">Correo Electrónico</label>

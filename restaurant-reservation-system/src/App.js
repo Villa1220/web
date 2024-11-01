@@ -5,7 +5,6 @@ import Menu from './modules/Menu';
 import Reservations from './modules/Reservations';
 import About from './modules/About';
 import Contact from './modules/Contact';
-import User from './modules/User';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Login from './modules/User/Login'; // Nuevo import
