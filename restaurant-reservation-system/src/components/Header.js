@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FaHome, FaUtensils, FaCalendarAlt, FaUserCircle, FaPhone } from 'react-icons/fa';
 import logo from '../images/logo.png';
 import './Header.css';
-import { UserContext } from '../context/UserContext'; // Importa el contexto
+import { UserContext } from '../context/UserContext';
 
 const Header = () => {
   const { user } = useContext(UserContext); // Obtiene el usuario del contexto
@@ -39,7 +39,7 @@ const Header = () => {
             </li>
             {user ? (
               <li>
-                <Link to="/user" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+                <Link to="#" style={{ textDecoration: "none", display: "flex", alignItems: "center", color: "white", padding: "12px 20px", borderRadius: "8px", margin: "0 5px", fontSize: "large" }}>
                   <FaUserCircle style={{ marginRight: "0.5rem" }} /> Bienvenido, {user.email}
                 </Link>
               </li>
