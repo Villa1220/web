@@ -1,2 +1,4 @@
 const BASE_URL = 'http://localhost:5000/api';
-export default BASE_URL;
+const IMAGE_URL = 'http://localhost:5000'; 
+
+export { BASE_URL, IMAGE_URL }; 

@@ -42,7 +42,7 @@ exports.getMenuItemById = async (req, res) => {
 // Crear un nuevo plato
 exports.createMenuItem = async (req, res) => {
     const { name, description, price } = req.body;
-    const image = req.file ? req.file.path : null; // Obtiene la ruta de la imagen cargada
+    const image = req.file ? `/uploads/${req.file.filename}` : null; // Cambiado a la URL accesible
     try {
         const menuItem = new MenuItem({ name, description, price, image });
         await menuItem.save();
@@ -56,7 +56,7 @@ exports.createMenuItem = async (req, res) => {
 exports.updateMenuItem = async (req, res) => {
     const { id } = req.params;
     const { name, description, price } = req.body;
-    const image = req.file ? req.file.path : null; // Obtiene la ruta de la imagen si se carga una nueva
+    const image = req.file ? `/uploads/${req.file.filename}` : null; // Cambiado a la URL accesible
     try {
         const menuItem = await MenuItem.findByIdAndUpdate(id, { name, description, price, image }, { new: true });
         if (!menuItem) return res.status(404).json({ message: 'Plato no encontrado' });

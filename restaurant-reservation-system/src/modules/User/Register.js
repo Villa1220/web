@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './User.css';
-import BASE_URL from '../../config';
+import { BASE_URL, IMAGE_URL } from '../../config';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
