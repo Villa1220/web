@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Table, Button, Form, Modal, Card, Row, Col } from 'react-bootstrap';
+import { Table, Button, Form, Modal, } from 'react-bootstrap';
 import { BASE_URL, IMAGE_URL } from '../../config'; // Importar ambas constantes
 
 const ManageMenu = () => {
