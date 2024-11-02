@@ -1,0 +1,29 @@
+.nav {
+    background-color: #1c1c1c; /* Color de fondo */
+    color: #ffffff; /* Color del texto */
+    padding: 10px 0; /* Espaciado para separación */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra */
+  }
+  
+  .nav .MuiList-root {
+    padding: 0; /* Sin padding para la lista */
+    display: flex; /* Para que los elementos estén en fila */
+    justify-content: center; /* Centra los elementos en el contenedor */
+    margin: 0; /* Sin margen para la lista */
+  }
+  
+  .nav .MuiListItem-root {
+    padding: 10px 20px; /* Padding para los elementos de la lista */
+  }
+  
+  .nav a {
+    color: #ffffff; /* Color del texto de los enlaces */
+    text-decoration: none; /* Sin subrayado */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición para el color y fondo */
+  }
+  
+  .nav a:hover {
+    background-color: #F2CE16; /* Color de fondo al pasar el ratón */
+    color: #000000; /* Color del texto al pasar el ratón */
+  }
+  

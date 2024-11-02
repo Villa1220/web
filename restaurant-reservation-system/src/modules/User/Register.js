@@ -26,7 +26,7 @@ const Register = () => {
         phone
       });
       alert(response.data.message); // Muestra un mensaje de éxito
-      navigate('/user'); // Redirige a la página de inicio de sesión
+      navigate('/'); // Redirige a la página de inicio de sesión
     } catch (err) {
       setError('Error al registrarse');
     }

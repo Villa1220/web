@@ -4,23 +4,39 @@ import { useNavigate } from 'react-router-dom';
 import './User.css';
 import BASE_URL from '../../config';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../../context/UserContext'; // Importa el contexto
+import { UserContext } from '../../context/UserContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext); // Obtiene la función para establecer el usuario
+  const { setUser } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(`${BASE_URL}/auth/login`, { email, password });
-      localStorage.setItem('token', response.data.token); // Guarda el token en localStorage
-      setUser({ email: email, name: response.data.name }); // Guarda el usuario en el contexto
-      navigate('/user'); // Redirige a la página de usuario
+
+      // Revisa los datos que llegan en la respuesta
+      console.log("Datos recibidos:", response.data);
+
+      const { token, user } = response.data;
+      
+      // Verifica si el token y los datos de usuario están en la respuesta
+      if (!token || !user) {
+        throw new Error("No se encontró el token o los datos del usuario en la respuesta.");
+      }
+
+      // Guarda el token en localStorage y el usuario en el contexto
+      localStorage.setItem('token', token);
+      setUser({ email: user.email, role: user.role });
+
+      // Redirige a la página de inicio
+      navigate('/');
     } catch (err) {
+      // Muestra el error exacto en la consola
+      console.error("Error en el inicio de sesión:", err.response ? err.response.data : err.message);
       setError('Credenciales inválidas');
     }
   };
