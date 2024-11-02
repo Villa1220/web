@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './User.css';
 import BASE_URL from '../../config';
 import { Link } from 'react-router-dom';
-
+import { UserContext } from '../../context/UserContext';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -14,6 +14,7 @@ const Register = () => {
   const [phone, setPhone] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext); // Usar el contexto del usuario
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -23,12 +24,31 @@ const Register = () => {
         email,
         password,
         address,
-        phone
+        phone,
       });
       alert(response.data.message); // Muestra un mensaje de éxito
-      navigate('/'); // Redirige a la página de inicio de sesión
+
+      // Ahora inicia sesión automáticamente
+      const loginResponse = await axios.post(`${BASE_URL}/auth/login`, {
+        email,
+        password,
+      });
+
+      const { token, user } = loginResponse.data;
+
+      // Verifica si el token y los datos de usuario están en la respuesta
+      if (!token || !user) {
+        throw new Error("No se encontró el token o los datos del usuario en la respuesta.");
+      }
+
+      // Guarda el token en localStorage y el usuario en el contexto
+      localStorage.setItem('token', token);
+      setUser({ email: user.email, role: user.role });
+
+      // Redirige a la página principal
+      navigate('/');
     } catch (err) {
-      setError('Error al registrarse');
+      setError('Error al registrarse o iniciar sesión');
     }
   };
 
