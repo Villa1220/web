@@ -1,36 +1,59 @@
 const Reservation = require('../models/Reservation');
-const User = require('../models/User');
+const ReservationDetail = require('../models/ReservationDetail');
 const MenuItem = require('../models/MenuItem');
 
 // Crear una reserva
 exports.createReservation = async (req, res) => {
   const { reservationDate, guests, menuItems } = req.body;
-  const userId = req.user.userId; // ID del usuario que hace la reserva
+  const userId = req.user.userId;
+
+  // Validaciones de entrada
+  if (!reservationDate || !guests || !Array.isArray(menuItems) || menuItems.length === 0) {
+    return res.status(400).json({ message: 'Datos de reserva incompletos o inválidos.' });
+  }
 
   try {
+    // Verificar que todos los items del menú existen
+    const menuItemsInDB = await MenuItem.find({ '_id': { $in: menuItems.map(item => item.item) } });
+    if (menuItemsInDB.length !== menuItems.length) {
+      return res.status(400).json({ message: 'Uno o más platos no existen.' });
+    }
+
+    // Crear la reserva
     const reservation = new Reservation({
       user: userId,
       reservationDate,
       guests,
-      menuItems,
     });
 
     await reservation.save();
-    res.status(201).json(reservation);
+
+    // Crear detalles de la reserva
+    const reservationDetails = menuItems.map(item => ({
+      reservation: reservation._id,
+      menuItem: item.item,
+      quantity: item.quantity,
+    }));
+    await ReservationDetail.insertMany(reservationDetails);
+
+    res.status(201).json({ reservation, reservationDetails });
   } catch (error) {
-    res.status(500).json({ message: 'Error al crear la reserva', error });
+    console.error('Error al crear la reserva:', error);
+    res.status(500).json({ message: 'Error al crear la reserva', error: error.message });
   }
 };
 
-// Ver todas las reservas del usuario
+// Obtener todas las reservas del usuario
 exports.getUserReservations = async (req, res) => {
   const userId = req.user.userId;
 
   try {
-    const reservations = await Reservation.find({ user: userId }).populate('menuItems');
-    res.json(reservations);
+    const reservations = await Reservation.find({ user: userId });
+    const reservationDetails = await ReservationDetail.find({ reservation: { $in: reservations.map(r => r._id) } }).populate('menuItem');
+    res.json({ reservations, reservationDetails });
   } catch (error) {
-    res.status(500).json({ message: 'Error al obtener las reservas', error });
+    console.error('Error al obtener las reservas del usuario:', error);
+    res.status(500).json({ message: 'Error al obtener las reservas', error: error.message });
   }
 };
 
@@ -44,7 +67,8 @@ exports.updateReservation = async (req, res) => {
     if (!reservation) return res.status(404).json({ message: 'Reserva no encontrada' });
     res.json(reservation);
   } catch (error) {
-    res.status(500).json({ message: 'Error al modificar la reserva', error });
+    console.error('Error al modificar la reserva:', error);
+    res.status(500).json({ message: 'Error al modificar la reserva', error: error.message });
   }
 };
 
@@ -57,17 +81,20 @@ exports.cancelReservation = async (req, res) => {
     if (!reservation) return res.status(404).json({ message: 'Reserva no encontrada' });
     res.json(reservation);
   } catch (error) {
-    res.status(500).json({ message: 'Error al cancelar la reserva', error });
+    console.error('Error al cancelar la reserva:', error);
+    res.status(500).json({ message: 'Error al cancelar la reserva', error: error.message });
   }
 };
 
 // Administrador: ver todas las reservas
 exports.getAllReservations = async (req, res) => {
   try {
-    const reservations = await Reservation.find().populate('user menuItems');
-    res.json(reservations);
+    const reservations = await Reservation.find().populate('user');
+    const reservationDetails = await ReservationDetail.find({ reservation: { $in: reservations.map(r => r._id) } }).populate('menuItem');
+    res.json({ reservations, reservationDetails });
   } catch (error) {
-    res.status(500).json({ message: 'Error al obtener las reservas', error });
+    console.error('Error al obtener todas las reservas:', error);
+    res.status(500).json({ message: 'Error al obtener las reservas', error: error.message });
   }
 };
 
@@ -81,7 +108,8 @@ exports.updateReservationStatus = async (req, res) => {
     if (!reservation) return res.status(404).json({ message: 'Reserva no encontrada' });
     res.json(reservation);
   } catch (error) {
-    res.status(500).json({ message: 'Error al actualizar el estado de la reserva', error });
+    console.error('Error al actualizar el estado de la reserva:', error);
+    res.status(500).json({ message: 'Error al actualizar el estado de la reserva', error: error.message });
   }
 };
 
@@ -92,9 +120,11 @@ exports.deleteReservation = async (req, res) => {
   try {
     const reservation = await Reservation.findByIdAndDelete(id);
     if (!reservation) return res.status(404).json({ message: 'Reserva no encontrada' });
+    await ReservationDetail.deleteMany({ reservation: id }); // Borrar los detalles relacionados
     res.json({ message: 'Reserva eliminada exitosamente' });
   } catch (error) {
-    res.status(500).json({ message: 'Error al eliminar la reserva', error });
+    console.error('Error al eliminar la reserva:', error);
+    res.status(500).json({ message: 'Error al eliminar la reserva', error: error.message });
   }
 };
 
@@ -108,6 +138,7 @@ exports.editReservation = async (req, res) => {
     if (!reservation) return res.status(404).json({ message: 'Reserva no encontrada' });
     res.json(reservation);
   } catch (error) {
-    res.status(500).json({ message: 'Error al editar la reserva', error });
+    console.error('Error al editar la reserva:', error);
+    res.status(500).json({ message: 'Error al editar la reserva', error: error.message });
   }
 };

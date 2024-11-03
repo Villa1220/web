@@ -1,3 +1,4 @@
+// models/Reservation.js
 const mongoose = require('mongoose');
 
 const reservationSchema = new mongoose.Schema({
@@ -5,8 +6,7 @@ const reservationSchema = new mongoose.Schema({
   dateCreated: { type: Date, default: Date.now },
   reservationDate: { type: Date, required: true },
   guests: { type: Number, required: true },
-  menuItems: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem' }],
-  status: { type: String, enum: ['pending', 'accepted', 'canceled'], default: 'pending' } // Solo visible para el admin
+  status: { type: String, enum: ['pending', 'accepted', 'canceled'], default: 'pending' }
 }, {
   timestamps: true,
 });

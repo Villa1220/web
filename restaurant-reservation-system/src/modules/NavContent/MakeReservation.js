@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { BASE_URL, IMAGE_URL } from '../../config';
-import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Grid, Typography, Card, CardMedia } from '@mui/material';
+import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Grid, Card, CardMedia } from '@mui/material';
+import { UserContext } from '../../context/UserContext';
 
 const MakeReservation = () => {
+    const { user } = useContext(UserContext); // Obteniendo el usuario actual
     const [menuItems, setMenuItems] = useState([]);
     const [selectedMenuItems, setSelectedMenuItems] = useState({});
     const [guests, setGuests] = useState('');
     const [reservationDate, setReservationDate] = useState('');
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
 
     useEffect(() => {
         const fetchMenuItems = async () => {
@@ -29,16 +32,18 @@ const MakeReservation = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Comprobación de datos de entrada
+        setError('');
+        setSuccess('');
+
+        // Validaciones previas a la reserva
         if (!reservationDate || !guests) {
             setError('Por favor, complete todos los campos obligatorios.');
             return;
         }
 
-        // Solo agregar los IDs de los items seleccionados, no las cantidades
-        const menuItemsToReserve = Object.keys(selectedMenuItems)
-            .map(id => selectedMenuItems[id] > 0 ? id : null) // Solo guardar IDs si la cantidad es mayor a 0
-            .filter(item => item !== null); // Filtrar solo los elementos válidos
+        const menuItemsToReserve = Object.entries(selectedMenuItems)
+            .map(([id, quantity]) => quantity > 0 ? { item: id, quantity } : null)
+            .filter(item => item !== null);
 
         if (menuItemsToReserve.length === 0) {
             setError('Por favor, seleccione al menos un plato con cantidad.');
@@ -46,25 +51,32 @@ const MakeReservation = () => {
         }
 
         try {
-            const token = localStorage.getItem('token'); // Obtiene el token del localStorage
-            const response = await axios.post(`${BASE_URL}/reservations`, {
-                reservationDate,
-                guests: parseInt(guests, 10),
-                menuItems: menuItemsToReserve, // Solo los IDs
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}` // Añade el token en el header
+            const token = localStorage.getItem('token');
+            const response = await axios.post(
+                `${BASE_URL}/reservations`,
+                {
+                    reservationDate,
+                    guests: parseInt(guests, 10),
+                    menuItems: menuItemsToReserve,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 }
-            });
+            );
+            
             console.log('Reservation created:', response.data);
-            setError('Reserva creada exitosamente.');
-            // Resetear el formulario si se desea
+            setSuccess('Reserva creada exitosamente.');
             setSelectedMenuItems({});
             setGuests('');
             setReservationDate('');
         } catch (error) {
             console.error('Error creating reservation:', error);
             setError('Error al crear la reserva. Intente de nuevo más tarde.');
+            if (error.response && error.response.data.message) {
+                setError(`Error: ${error.response.data.message}`);
+            }
         }
     };
 
@@ -72,6 +84,7 @@ const MakeReservation = () => {
         <div>
             <h2>Realiza una Reserva</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
+            {success && <p style={{ color: 'green' }}>{success}</p>}
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -101,31 +114,31 @@ const MakeReservation = () => {
                                 <CardMedia
                                     component="img"
                                     alt={item.name}
-                                    image={`${IMAGE_URL}${item.image}`} 
+                                    image={`${IMAGE_URL}${item.image}`}
                                     title={item.name}
-                                    style={{ width: 100, height: 100, objectFit: 'cover', marginRight: '1rem' }}
+                                    style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '1rem' }}
                                 />
-                                <FormControl fullWidth margin="normal">
-                                    <InputLabel>{item.name}</InputLabel>
-                                    <Select
-                                        value={selectedMenuItems[item._id] || ''}
-                                        onChange={(e) => handleChange(item._id, e.target.value)}
-                                    >
-                                        <MenuItem value="">
-                                            <em>Seleccione cantidad</em>
-                                        </MenuItem>
-                                        {[...Array(10).keys()].map(num => (
-                                            <MenuItem key={num} value={num + 1}>{num + 1}</MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
+                                <div style={{ flex: 1 }}>
+                                    <h4>{item.name}</h4>
+                                    <p>{item.description}</p>
+                                    <FormControl fullWidth>
+                                        <InputLabel>Cantidad</InputLabel>
+                                        <Select
+                                            value={selectedMenuItems[item._id] || 0}
+                                            onChange={(e) => handleChange(item._id, e.target.value)}
+                                        >
+                                            <MenuItem value={0}>0</MenuItem>
+                                            {[1, 2, 3, 4, 5].map(num => (
+                                                <MenuItem key={num} value={num}>{num}</MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                </div>
                             </Card>
                         ))}
                     </Grid>
                     <Grid item xs={12}>
-                        <Button type="submit" variant="contained" color="primary">
-                            Confirmar Reserva
-                        </Button>
+                        <Button type="submit" variant="contained" color="primary">Reservar</Button>
                     </Grid>
                 </Grid>
             </form>
