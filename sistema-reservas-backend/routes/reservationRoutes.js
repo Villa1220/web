@@ -5,7 +5,9 @@ const {
   updateReservation, 
   cancelReservation, 
   getAllReservations, 
-  updateReservationStatus 
+  updateReservationStatus, 
+  deleteReservation, 
+  editReservation 
 } = require('../controllers/reservationController');
 const { authMiddleware, adminMiddleware } = require('../middleware/authMiddleware');
 
@@ -22,6 +24,5 @@ router.get('/admin', authMiddleware, adminMiddleware, getAllReservations); // Ve
 router.put('/admin/:id/status', authMiddleware, adminMiddleware, updateReservationStatus); // Modificar estado de reserva
 router.delete('/admin/:id', authMiddleware, adminMiddleware, deleteReservation); // Eliminar reserva
 router.put('/admin/:id', authMiddleware, adminMiddleware, editReservation); // Editar reserva
-
 
 module.exports = router;

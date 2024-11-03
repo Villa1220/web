@@ -87,28 +87,27 @@ exports.updateReservationStatus = async (req, res) => {
 
 // Eliminar una reserva
 exports.deleteReservation = async (req, res) => {
-    const { id } = req.params;
-  
-    try {
-      const reservation = await Reservation.findByIdAndDelete(id);
-      if (!reservation) return res.status(404).json({ message: 'Reserva no encontrada' });
-      res.json({ message: 'Reserva eliminada exitosamente' });
-    } catch (error) {
-      res.status(500).json({ message: 'Error al eliminar la reserva', error });
-    }
-  };
-  
-  // Editar una reserva (si el administrador quiere cambiar cualquier propiedad)
-  exports.editReservation = async (req, res) => {
-    const { id } = req.params;
-    const updates = req.body;
-  
-    try {
-      const reservation = await Reservation.findByIdAndUpdate(id, updates, { new: true });
-      if (!reservation) return res.status(404).json({ message: 'Reserva no encontrada' });
-      res.json(reservation);
-    } catch (error) {
-      res.status(500).json({ message: 'Error al editar la reserva', error });
-    }
-  };
-  
+  const { id } = req.params;
+
+  try {
+    const reservation = await Reservation.findByIdAndDelete(id);
+    if (!reservation) return res.status(404).json({ message: 'Reserva no encontrada' });
+    res.json({ message: 'Reserva eliminada exitosamente' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error al eliminar la reserva', error });
+  }
+};
+
+// Editar una reserva (si el administrador quiere cambiar cualquier propiedad)
+exports.editReservation = async (req, res) => {
+  const { id } = req.params;
+  const updates = req.body;
+
+  try {
+    const reservation = await Reservation.findByIdAndUpdate(id, updates, { new: true });
+    if (!reservation) return res.status(404).json({ message: 'Reserva no encontrada' });
+    res.json(reservation);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al editar la reserva', error });
+  }
+};

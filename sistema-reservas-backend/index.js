@@ -18,7 +18,7 @@ app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
+const userRoutes = require('./routes/userRoutes'); 
 const menuRoutes = require('./routes/menuRoutes'); 
 const reservationRoutes = require('./routes/reservationRoutes');
 
