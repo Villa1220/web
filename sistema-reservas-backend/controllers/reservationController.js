@@ -49,13 +49,19 @@ exports.getUserReservations = async (req, res) => {
 
   try {
     const reservations = await Reservation.find({ user: userId });
-    const reservationDetails = await ReservationDetail.find({ reservation: { $in: reservations.map(r => r._id) } }).populate('menuItem');
+    const reservationDetails = await ReservationDetail.find({ reservation: { $in: reservations.map(r => r._id) } })
+      .populate({
+        path: 'menuItem',
+        select: 'name image', // Incluye nombre e imagen de cada plato
+      });
+
     res.json({ reservations, reservationDetails });
   } catch (error) {
     console.error('Error al obtener las reservas del usuario:', error);
     res.status(500).json({ message: 'Error al obtener las reservas', error: error.message });
   }
 };
+
 
 // Modificar una reserva
 exports.updateReservation = async (req, res) => {

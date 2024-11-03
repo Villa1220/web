@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BASE_URL } from '../../config';
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { BASE_URL, IMAGE_URL } from '../../config';
+import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Avatar } from '@mui/material';
 
 const MyReservations = () => {
     const [reservations, setReservations] = useState([]);
@@ -69,6 +69,7 @@ const MyReservations = () => {
                         <TableRow>
                             <TableCell>Fecha de Reserva</TableCell>
                             <TableCell>Número de Invitados</TableCell>
+                            <TableCell>Estado</TableCell>
                             <TableCell>Platos</TableCell>
                             <TableCell>Acciones</TableCell>
                         </TableRow>
@@ -78,11 +79,17 @@ const MyReservations = () => {
                             <TableRow key={reservation._id}>
                                 <TableCell>{new Date(reservation.reservationDate).toLocaleString()}</TableCell>
                                 <TableCell>{reservation.guests}</TableCell>
+                                <TableCell>{reservation.status}</TableCell>
                                 <TableCell>
                                     {getReservationMenuItems(reservation._id).length > 0 ? (
                                         getReservationMenuItems(reservation._id).map((item) => (
-                                            <div key={item._id}>
-                                                {item.name} (x{item.quantity})
+                                            <div key={item._id} style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
+                                                <Avatar 
+                                                    src={`${IMAGE_URL.replace(/\/+$/, '')}/${item.image.replace(/^\/+/, '')}`} 
+                                                    alt={item.name} 
+                                                    style={{ marginRight: '10px' }} 
+                                                />
+                                                <span>{item.name} (x{item.quantity})</span>
                                             </div>
                                         ))
                                     ) : (
