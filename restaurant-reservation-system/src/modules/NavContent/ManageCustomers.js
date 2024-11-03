@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Button, Form, Modal } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
-import { BASE_URL, IMAGE_URL } from '../../config';
+import { BASE_URL } from '../../config';
 
 const ADMIN_KEY = 'clave_segura_para_crear_admin'; 
 
