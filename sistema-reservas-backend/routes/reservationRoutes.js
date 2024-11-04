@@ -1,28 +1,27 @@
 const express = require('express');
-const { 
-  createReservation, 
-  getUserReservations, 
-  updateReservation, 
-  cancelReservation, 
-  getAllReservations, 
-  updateReservationStatus, 
-  deleteReservation, 
-  editReservation 
+const {
+    createReservation,
+    getUserReservations,
+    updateReservation,
+    cancelReservation,
+    getAllReservations,
+    updateReservationStatus,
+    deleteReservation,
+    editReservation
 } = require('../controllers/reservationController');
-const { authMiddleware, adminMiddleware } = require('../middleware/authMiddleware');
+const { authMiddleware, adminMiddleware } = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
-// Rutas para el usuario
-router.post('/', authMiddleware, createReservation); // Crear reserva
-router.get('/', authMiddleware, getUserReservations); // Ver reservas del usuario
-router.put('/:id', authMiddleware, updateReservation); // Modificar reserva
-router.delete('/:id', authMiddleware, cancelReservation); // Cancelar reserva
+router.post('/', authMiddleware, createReservation);
+router.get('/', authMiddleware, getUserReservations);
+router.get('/admin', adminMiddleware, getAllReservations); // Obtener todas las reservas con filtros
+router.put('/:id', authMiddleware, updateReservation);
+router.delete('/:id', authMiddleware, cancelReservation);
 
-// Rutas para administrador
-router.get('/admin', authMiddleware, adminMiddleware, getAllReservations); // Ver todas las reservas
-router.put('/admin/:id/status', authMiddleware, adminMiddleware, updateReservationStatus); // Modificar estado de reserva
-router.delete('/admin/:id', authMiddleware, adminMiddleware, deleteReservation); // Eliminar reserva
-router.put('/admin/:id', authMiddleware, adminMiddleware, editReservation); // Editar reserva
+// Admin routes
+router.put('/admin/:id/status', adminMiddleware, updateReservationStatus); // Cambiar el estado de la reserva
+router.delete('/admin/:id', adminMiddleware, deleteReservation); // Eliminar reserva
+router.put('/admin/edit/:id', adminMiddleware, editReservation); // Editar reserva
 
 module.exports = router;

@@ -1,30 +1,30 @@
 .nav {
-  background-color: #1c1c1c; 
-  color: #ffffff; 
-  text-align: center; 
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  background-color: #1c1c1c!important; 
+  color: #ffffff!important; 
+  text-align: center!important; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3)!important;
 }
 
 .nav .MuiList-root {
-  padding: 0; /* Sin padding para la lista */
-  display:flex; /* Para que los elementos estén en fila */
-  justify-content: center; /* Centra los elementos en el contenedor */
-  margin: 1.5px; /* Sin margen para la lista */
+  padding: 0!important; /* Sin padding para la lista */
+  display:flex!important; /* Para que los elementos estén en fila */
+  justify-content: center!important; /* Centra los elementos en el contenedor */
+  margin: 1.5px!important; /* Sin margen para la lista */
 }
 
 .nav .MuiListItem-root {
-  padding: 5px 5px; /* Padding para los elementos de la lista */
+  padding: 5px 5px!important; /* Padding para los elementos de la lista */
 }
 
 .nav a {
-  text-align: center;
-  color: white; 
-  padding: 12px 20px; 
-  border-radius: 8px; 
-  font-weight: bold; /* Cambiado a 'bold' para aplicar negrita */
-  transition: background-color 0.3s ease, transform 0.3s ease; 
-  margin: 0 5px; 
-  font-size: x-large; /* Manteniendo tamaño de fuente grande */
+  text-align: center!important;
+  color: white!important; 
+  padding: 12px 20px!important; 
+  border-radius: 8px!important; 
+  font-weight: bold!important; /* Cambiado a 'bold' para aplicar negrita */
+  transition: background-color 0.3s ease, transform 0.3s ease!important; 
+  margin: 0 5px!important; 
+  font-size: x-large!important; /* Manteniendo tamaño de fuente grande */
 }
 
 

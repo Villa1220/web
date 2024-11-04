@@ -19,7 +19,7 @@ import ManageCustomers from './modules/NavContent/ManageCustomers';
 import ManageMenu from './modules/NavContent/ManageMenu';
 import ManageReservations from './modules/NavContent/ManageReservations';
 import MyReservations from './modules/NavContent/MyReservations';
-import Profile from './modules/NavContent/Profile';
+
 
 function App() {
   const { user } = useContext(UserContext);
@@ -89,16 +89,6 @@ function App() {
             element={
               <ProtectedRoute>
                 <MyReservations />
-              </ProtectedRoute>
-            } 
-          />
-
-          {/* Ruta accesible por ambos roles */}
-          <Route 
-            path="/profile" 
-            element={
-              <ProtectedRoute>
-                <Profile />
               </ProtectedRoute>
             } 
           />

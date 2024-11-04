@@ -16,12 +16,10 @@ const Nav = () => {
         { text: 'Gestionar Clientes', link: '/manage-customers' },
         { text: 'Gestionar Reservas', link: '/manage-reservations' },
         { text: 'Gestionar Menú', link: '/manage-menu' },
-        { text: 'Mi Perfil', link: '/profile' },
       ]
     : [
         { text: 'Realiza una Reserva YA', link: '/make-reservation' },
         { text: 'Gestionar mis Reservas', link: '/my-reservations' },
-        { text: 'Mi Perfil', link: '/profile' },
       ];
 
   // Función para cerrar sesión

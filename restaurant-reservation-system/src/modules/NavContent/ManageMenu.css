@@ -1,0 +1,97 @@
+.table-container {
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    flex-direction: column; /* Apila los elementos verticalmente */
+    margin: 20px; /* Añade margen alrededor del contenedor */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Centra el botón */
+    margin-bottom: 20px; /* Espacio debajo del botón */
+}
+
+.table {
+    width: 100%; /* Asegura que la tabla use todo el ancho disponible */
+    max-width: 800px; /* Limita el ancho máximo para una mejor presentación */
+    border-radius: 10px; /* Bordes redondeados */
+    overflow: hidden; /* Esconde los bordes redondeados */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background-color: #ffffff; /* Fondo blanco para la tabla */
+}
+
+.table th {
+    background-color: #1c1c1c; /* Color de fondo para encabezados */
+    color: #ffffff; /* Color del texto */
+    text-align: center; /* Centra el texto */
+    padding: 15px; /* Espaciado interno */
+}
+
+.table tbody tr:hover {
+    background-color: #2c2c2c; /* Color de fondo al pasar el mouse */
+}
+
+.table tbody tr {
+    transition: background-color 0.3s; /* Suaviza la transición del color */
+}
+
+.btn {
+    text-align: center;
+    color: #ffffff; 
+    padding: 4px 10px; /* Ajustado para hacer el botón más pequeño */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+    margin: 0 5px; 
+    font-size: large; /* Ajustado a un tamaño de fuente más pequeño */
+}
+
+.btn:hover {
+    background-color: #F2CE16; /* Color al pasar el mouse */
+    color: #000000; 
+    transform: scale(1.10); 
+}
+
+.btn.success {
+    background-color: #2dc751; /* Color de fondo para el botón Editar */
+}
+
+.btn.danger {
+    background-color: #dc3545; /* Color de fondo para el botón Eliminar */
+}
+
+.modal-header {
+    background-color: #343a40; /* Color de fondo del encabezado del modal */
+    color: #f8f9fa; /* Color del texto del encabezado del modal */
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between; /* Distribuye botones al final */
+}
+
+.text-danger {
+    margin: 10px 0; /* Espaciado superior e inferior para el mensaje de error */
+    color: #dc3545; /* Color del mensaje de error */
+}
+
+/* Estilo para los formularios en el modal */
+.modal-body .form-control {
+    border: 1px solid #ced4da; /* Borde gris claro */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: border-color 0.3s; /* Suaviza la transición del borde */
+}
+
+/* Estilos globales */
+body {
+    font-family: 'Roboto', sans-serif; /* Fuente consistente */
+    margin: 0; 
+    padding: 0; 
+    background-color: #e2d9d9; /* Fondo general */
+    color: #333; /* Color del texto general */
+}
+
+a {
+    text-decoration: none; 
+    color: inherit; 
+}

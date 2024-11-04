@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Table, Button, Form, Modal, } from 'react-bootstrap';
-import { BASE_URL, IMAGE_URL } from '../../config'; // Importar ambas constantes
+import { Table, Button, Form, Modal } from 'react-bootstrap';
+import { BASE_URL, IMAGE_URL } from '../../config'; 
+import './ManageMenu.css';
 
 const ManageMenu = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -96,45 +97,50 @@ const ManageMenu = () => {
 
   return (
     <>
-      <Button onClick={() => setShowModal(true)}>Agregar Plato</Button>
+      {/* Contenedor para centrar el botón "Agregar Plato" */}
+      <div className="button-container">
+        <Button onClick={() => setShowModal(true)}>Agregar Plato</Button>
+      </div>
 
       {error && <p className="text-danger">{error}</p>}
 
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Imagen</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {menuItems.map((item) => (
-            <tr key={item._id}>
-              <td>{item.name}</td>
-              <td>{item.description}</td>
-              <td>{item.price}</td>
-              <td>
-                {item.image ? (
-                  <img
-                    src={`${IMAGE_URL}${item.image}`} // Cambiado para asegurar que la URL no contenga barras diagonales duplicadas
-                    alt={item.name}
-                    style={{ width: '50px', height: '50px' }}
-                  />
-                ) : (
-                  'Sin imagen'
-                )}
-              </td>
-              <td>
-                <Button variant="warning" onClick={() => handleEdit(item)}>Editar</Button>
-                <Button variant="danger" onClick={() => handleDelete(item._id)}>Eliminar</Button>
-              </td>
+      <div className="table-container">
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Precio</th>
+              <th>Imagen</th>
+              <th>Acciones</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {menuItems.map((item) => (
+              <tr key={item._id}>
+                <td>{item.name}</td>
+                <td>{item.description}</td>
+                <td>{item.price}</td>
+                <td>
+                  {item.image ? (
+                    <img
+                      src={`${IMAGE_URL}${item.image}`} // Asegurarse que la URL no tenga barras duplicadas
+                      alt={item.name}
+                      style={{ width: '50px', height: '50px' }}
+                    />
+                  ) : (
+                    'Sin imagen'
+                  )}
+                </td>
+                <td>
+                  <Button variant="success" onClick={() => handleEdit(item)}>Editar</Button>
+                  <Button variant="danger" onClick={() => handleDelete(item._id)}>Eliminar</Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
 
       <Modal show={showModal} onHide={resetForm}>
         <Modal.Header closeButton>
