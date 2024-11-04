@@ -24,6 +24,7 @@ import {
     Card,
     CardMedia,
 } from '@mui/material';
+import './MyReservations.css'; 
 
 const MyReservations = () => {
     const [reservations, setReservations] = useState([]);
@@ -123,10 +124,9 @@ const MyReservations = () => {
                 }
             );
 
-            // Actualizar la tabla con la nueva información de la reserva
             setReservations(reservations.map((reservation) => {
                 if (reservation._id === selectedReservation._id) {
-                    return { ...reservation, ...response.data }; // Asegúrate de que la respuesta contenga los datos actualizados
+                    return { ...reservation, ...response.data };
                 }
                 return reservation;
             }));
@@ -143,27 +143,27 @@ const MyReservations = () => {
     };
 
     return (
-        <div>
+        <div className="my-reservations-container"> {/* Aplicar clase para centrar contenido */}
             <h2>Mis Reservas</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} className="table-container">
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Fecha de Reserva</TableCell>
-                            <TableCell>Número de Invitados</TableCell>
-                            <TableCell>Estado</TableCell>
-                            <TableCell>Platos</TableCell>
-                            <TableCell>Acciones</TableCell>
+                            <TableCell className="table-cell">Fecha de Reserva</TableCell>
+                            <TableCell className="table-cell">Número de Invitados</TableCell>
+                            <TableCell className="table-cell">Estado</TableCell>
+                            <TableCell className="table-cell">Platos</TableCell>
+                            <TableCell className="table-cell">Acciones</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {reservations.map((reservation) => (
                             <TableRow key={reservation._id}>
-                                <TableCell>{new Date(reservation.reservationDate).toLocaleString()}</TableCell>
-                                <TableCell>{reservation.guests}</TableCell>
-                                <TableCell>{reservation.status}</TableCell>
-                                <TableCell>
+                                <TableCell className="table-cell">{new Date(reservation.reservationDate).toLocaleString()}</TableCell>
+                                <TableCell className="table-cell">{reservation.guests}</TableCell>
+                                <TableCell className="table-cell">{reservation.status}</TableCell>
+                                <TableCell className="table-cell">
                                     {getReservationMenuItems(reservation._id).length > 0 ? (
                                         getReservationMenuItems(reservation._id).map((item) => (
                                             <div key={item.menuItem} style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
@@ -179,7 +179,7 @@ const MyReservations = () => {
                                         <div>No hay platos en esta reserva.</div>
                                     )}
                                 </TableCell>
-                                <TableCell>
+                                <TableCell className="table-cell">
                                     <Button
                                         variant="contained"
                                         color="primary"
@@ -229,7 +229,7 @@ const MyReservations = () => {
                         <Grid item xs={12}>
                             <h3>Selecciona los Platos</h3>
                             {menuItems.map((item) => (
-                                <Card key={item._id} style={{ marginBottom: '1rem', padding: '1rem', display: 'flex', alignItems: 'center' }}>
+                                <Card key={item._id} className="card"> {/* Aplicar clase de tarjeta */}
                                     <CardMedia
                                         component="img"
                                         alt={item.name}

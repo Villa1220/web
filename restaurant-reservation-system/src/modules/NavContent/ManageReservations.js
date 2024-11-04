@@ -18,6 +18,7 @@ import {
     Paper,
     TablePagination,
 } from '@mui/material';
+import './ManageReservation.css'; // Importar el CSS
 
 const ManageReservations = () => {
     const [reservations, setReservations] = useState([]);
@@ -173,10 +174,10 @@ const ManageReservations = () => {
     };
 
     return (
-        <div>
+        <div className="manage-reservations-container"> {/* Clase de contenedor */}
             <h2>Gestión de Reservas</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {success && <p style={{ color: 'green' }}>{success}</p>}
+            {error && <p className="error-message">{error}</p>}
+            {success && <p className="success-message">{success}</p>}
 
             <h3>Reservas Disponibles</h3>
             <TableContainer component={Paper}>

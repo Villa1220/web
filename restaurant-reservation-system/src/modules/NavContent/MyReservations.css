@@ -1,0 +1,33 @@
+/* MyReservations.css */
+
+.my-reservations-container {
+    max-width: 800px; /* Limita el ancho del contenedor */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    padding: 20px; /* Añade un poco de espacio interno */
+    background-color: #f9f9f9; /* Color de fondo claro */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+h2 {
+    text-align: center; /* Centra el título */
+    color: #333; /* Color del texto */
+}
+
+.table-container {
+    margin-top: 20px; /* Margen superior para la tabla */
+}
+
+.table-cell {
+    text-align:center; /* Centra el contenido de las celdas */
+}
+
+.card {
+    margin-bottom: 15px; /* Espacio entre las tarjetas */
+    padding: 1rem; /* Espacio interno */
+    display: flex; /* Flexbox para la tarjeta */
+    align-items: center; /* Centra verticalmente el contenido */
+    border: 1px solid #e0e0e0; /* Borde de la tarjeta */
+    border-radius: 8px; /* Bordes redondeados en las tarjetas */
+    background-color: #fff; /* Fondo blanco para las tarjetas */
+}

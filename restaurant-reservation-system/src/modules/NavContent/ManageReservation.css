@@ -1,0 +1,42 @@
+.manage-reservations-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9; /* Fondo claro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+h2, h3 {
+    color: #333; /* Color de los encabezados */
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+.success-message {
+    color: green;
+    font-weight: bold;
+}
+
+.table-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+form {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #ffffff; /* Fondo blanco para el formulario */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    margin-top: 1rem;
+}
