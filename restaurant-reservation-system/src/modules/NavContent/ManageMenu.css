@@ -6,10 +6,15 @@
     margin: 20px; /* Añade margen alrededor del contenedor */
 }
 
-.button-container {
-    display: flex;
-    justify-content: center; /* Centra el botón */
-    margin-bottom: 20px; /* Espacio debajo del botón */
+.manage-menu-nav {
+    display: flex; /* Flex para alinear el título y el botón */
+    justify-content: space-between; /* Espacio entre elementos */
+    align-items: center; /* Centra verticalmente */
+    margin-bottom: 20px; /* Espacio debajo del encabezado */
+}
+
+.add-user-button {
+    margin-left: 20px; /* Espacio a la izquierda del botón */
 }
 
 .table {

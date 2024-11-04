@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Button, Form, Modal } from 'react-bootstrap';
 import { BASE_URL, IMAGE_URL } from '../../config'; 
-import './ManageMenu.css';
+import './ManageMenu.css'; // Importa el archivo CSS
 
 const ManageMenu = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -97,9 +97,10 @@ const ManageMenu = () => {
 
   return (
     <>
-      {/* Contenedor para centrar el botón "Agregar Plato" */}
-      <div className="button-container">
-        <Button onClick={() => setShowModal(true)}>Agregar Plato</Button>
+      {/* Encabezado de gestión del menú */}
+      <div className="manage-menu-nav">
+        <h2>Gestión de Menú</h2>
+        <Button className="add-user-button" onClick={() => setShowModal(true)}>Agregar Nuevo Plato</Button>
       </div>
 
       {error && <p className="text-danger">{error}</p>}
@@ -142,6 +143,7 @@ const ManageMenu = () => {
         </Table>
       </div>
 
+      {/* Modal para agregar o editar menú */}
       <Modal show={showModal} onHide={resetForm}>
         <Modal.Header closeButton>
           <Modal.Title>{editingItemId ? 'Editar Plato' : 'Agregar Plato'}</Modal.Title>

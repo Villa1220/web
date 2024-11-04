@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AppBar, Toolbar, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { FaHome, FaUtensils, FaCalendarAlt, FaUserCircle, FaPhone } from 'react-icons/fa';
+import { FaHome, FaUtensils, FaCalendarAlt, FaUserCircle } from 'react-icons/fa';
 import logo from '../images/logo.png';
 import './Header.css';
 import { UserContext } from '../context/UserContext';
@@ -30,11 +30,6 @@ const Header = () => {
             <li>
               <Link to="/reservations" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
                 <FaCalendarAlt style={{ marginRight: "0.5rem" }} /> Reservas
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
-                <FaPhone style={{ marginRight: "0.5rem" }} /> Contacto
               </Link>
             </li>
             {user ? (

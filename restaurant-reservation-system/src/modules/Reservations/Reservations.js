@@ -1,11 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './Reservation.css';
 
 const Reservations = () => {
   return (
-    <div>
-      <h1>Reservas</h1>
-      <p>Realiza, consulta o modifica tus reservas.</p>
-      {/* Aquí se añadirá la funcionalidad para realizar reservas */}
+    <div className="reservations-container">
+
+      <div className="promo-message">
+        <h2>SI QUIERES RESERVAR</h2>
+        <h2>¡¡¡ Regístrate ya para poder usar nuestros servicios !!!</h2>
+        <Link to="/register">
+          <button className="register-button">Regístrate</button>
+        </Link>
+      </div>
+      
     </div>
   );
 };

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Table, Button, Form, Modal } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { BASE_URL } from '../../config';
+import './ManageCustomers.css'; // Importa el archivo CSS
 
 const ADMIN_KEY = 'clave_segura_para_crear_admin'; 
 
@@ -101,9 +102,11 @@ const ManageCustomers = () => {
   const currentUsers = users.slice(currentPage * usersPerPage, (currentPage + 1) * usersPerPage);
 
   return (
-    <div>
-      <h2>Gestión de Clientes</h2>
-      <Button variant="primary" onClick={() => openModal()}>Agregar Nuevo Usuario</Button>
+    <div className="manage-customers-container">
+      <div className="manage-customers-nav">
+        <h2>Gestión de Clientes</h2>
+        <Button className="add-user-button" onClick={() => openModal()}>Agregar Nuevo Usuario</Button>
+      </div>
 
       <Table striped bordered hover className="mt-4">
         <thead>

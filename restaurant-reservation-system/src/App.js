@@ -1,11 +1,9 @@
-// src/App.js
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './modules/Home';
 import Menu from './modules/Menu';
 import Reservations from './modules/Reservations';
 import About from './modules/About';
-import Contact from './modules/Contact';
 import Header from './components/Header'; 
 import Footer from './components/Footer';
 import Login from './modules/User/Login';
@@ -19,7 +17,6 @@ import ManageCustomers from './modules/NavContent/ManageCustomers';
 import ManageMenu from './modules/NavContent/ManageMenu';
 import ManageReservations from './modules/NavContent/ManageReservations';
 import MyReservations from './modules/NavContent/MyReservations';
-
 
 function App() {
   const { user } = useContext(UserContext);
@@ -45,7 +42,6 @@ function App() {
           <Route path="/menu" element={<Menu />} />
           <Route path="/reservations" element={<Reservations />} />
           <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/user" element={<Login />} />
           <Route path="/register" element={<Register />} />
 

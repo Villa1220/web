@@ -1,0 +1,70 @@
+/* Contenedor principal para centrar el contenido */
+.manage-customers-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    margin: 20px; /* Espacio alrededor */
+}
+
+/* Estilos para el encabezado del Nav */
+.manage-customers-nav {
+    width: 100%;
+    background-color: #343a40; /* Color de fondo del nav */
+    padding: 10px 20px; /* Espaciado interno */
+    display: flex;
+    justify-content: space-between; /* Espacio entre elementos */
+    align-items: center; /* Centra verticalmente */
+    color: #ffffff; /* Color del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+/* Estilos del botón de agregar nuevo usuario */
+.add-user-button {
+    background-color: #007bff; /* Color de fondo */
+    border: none; /* Sin borde */
+    color: white; /* Color del texto */
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar */
+    transition: background-color 0.3s; /* Suaviza la transición */
+}
+
+/* Efecto al pasar el mouse sobre el botón */
+.add-user-button:hover {
+    background-color: #0056b3; /* Color más oscuro al pasar el mouse */
+}
+
+/* Estilos para la tabla */
+.table {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 800px; /* Ancho máximo */
+    margin-top: 20px; /* Espacio superior */
+    border-radius: 5px; /* Bordes redondeados */
+    overflow: hidden; /* Esconde los bordes redondeados */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Encabezados de la tabla */
+.table th {
+    background-color: #1c1c1c; /* Color de fondo */
+    color: #ffffff; /* Color del texto */
+    text-align: center; /* Centra el texto */
+    padding: 15px; /* Espaciado interno */
+}
+
+/* Fila de la tabla al pasar el mouse */
+.table tbody tr:hover {
+    background-color: #f2f2f2; /* Color de fondo al pasar */
+}
+
+/* Estilos de paginación */
+.pagination {
+    margin-top: 20px; /* Espacio superior */
+}
+
+/* Estilos para los mensajes de error */
+.text-danger {
+    margin: 10px 0; /* Espaciado superior e inferior */
+    color: #dc3545; /* Color del mensaje de error */
+}
