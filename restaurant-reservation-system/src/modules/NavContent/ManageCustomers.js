@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Table, Button, Form, Modal } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { BASE_URL } from '../../config';
-import './ManageCustomers.css'; // Importa el archivo CSS
+import './ManageCustomers.css'; 
 
 const ADMIN_KEY = 'clave_segura_para_crear_admin'; 
 

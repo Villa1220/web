@@ -3,6 +3,7 @@ import axios from 'axios';
 import { BASE_URL, IMAGE_URL } from '../../config';
 import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Grid, Card, CardMedia } from '@mui/material';
 import { UserContext } from '../../context/UserContext';
+import './MakeReservation.css'; // Importa el archivo CSS
 
 const MakeReservation = () => {
     const { user } = useContext(UserContext); // Obteniendo el usuario actual
@@ -81,13 +82,16 @@ const MakeReservation = () => {
     };
 
     return (
-        <div>
-            <h2>Realiza una Reserva</h2>
+        <div className="make-reservation-container"> {/* Clase para el contenedor */}
+            <h2 style={{ textAlign: 'center' }}>Realiza una Reserva</h2>
+
+            <br></br>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {success && <p style={{ color: 'green' }}>{success}</p>}
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
+                        <h3>Selecciona el Número de Invitados</h3> {/* Nueva instrucción */}
                         <TextField
                             label="Número de invitados"
                             type="number"
@@ -98,8 +102,8 @@ const MakeReservation = () => {
                         />
                     </Grid>
                     <Grid item xs={12}>
+                        <h3>Elige la Fecha de Reserva</h3> {/* Nueva instrucción */}
                         <TextField
-                            label="Fecha de Reserva"
                             type="datetime-local"
                             value={reservationDate}
                             onChange={(e) => setReservationDate(e.target.value)}
@@ -110,15 +114,15 @@ const MakeReservation = () => {
                     <Grid item xs={12}>
                         <h3>Selecciona los Platos</h3>
                         {menuItems.map((item) => (
-                            <Card key={item._id} style={{ marginBottom: '1rem', padding: '1rem', display: 'flex', alignItems: 'center' }}>
+                            <Card key={item._id} className="menu-item-card"> {/* Clase para cada card */}
                                 <CardMedia
                                     component="img"
                                     alt={item.name}
                                     image={`${IMAGE_URL}${item.image}`}
                                     title={item.name}
-                                    style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '1rem' }}
+                                    className="menu-item-image"
                                 />
-                                <div style={{ flex: 1 }}>
+                                <div className="menu-item-details">
                                     <h4>{item.name}</h4>
                                     <p>{item.description}</p>
                                     <FormControl fullWidth>
