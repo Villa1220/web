@@ -57,6 +57,12 @@ exports.getUserReservations = async (req, res) => {
 exports.getAllReservations = async (req, res) => {
     const { startDate, endDate, userId } = req.query;
 
+    // Validación de formato de fecha para startDate y endDate
+    const isValidDate = date => !isNaN(Date.parse(date));
+    if ((startDate && !isValidDate(startDate)) || (endDate && !isValidDate(endDate))) {
+        return res.status(400).json({ message: 'Formato de fecha inválido en startDate o endDate' });
+    }
+
     try {
         let query = {};
         if (startDate || endDate) {
@@ -78,6 +84,7 @@ exports.getAllReservations = async (req, res) => {
         res.status(500).json({ message: 'Error al obtener las reservas', error: error.message });
     }
 };
+
 
 exports.updateReservation = async (req, res) => {
     const { id } = req.params;

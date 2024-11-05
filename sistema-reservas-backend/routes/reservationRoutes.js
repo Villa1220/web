@@ -15,7 +15,7 @@ const router = express.Router();
 
 router.post('/', authMiddleware, createReservation);
 router.get('/', authMiddleware, getUserReservations);
-router.get('/admin', adminMiddleware, getAllReservations); 
+router.get('/admin', authMiddleware, adminMiddleware, getAllReservations);
 router.put('/:id', authMiddleware, updateReservation);
 router.delete('/:id', authMiddleware, cancelReservation);
 

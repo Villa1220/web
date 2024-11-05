@@ -18,7 +18,7 @@ import {
     Paper,
     TablePagination,
 } from '@mui/material';
-import './ManageReservation.css'; 
+import './ManageReservation.css';
 
 const ManageReservations = () => {
     const [reservations, setReservations] = useState([]);
