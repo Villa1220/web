@@ -2,22 +2,20 @@ const MenuItem = require('../models/MenuItem');
 const multer = require('multer');
 const path = require('path');
 
-// Configuración de multer
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, '../uploads')); // Asegúrate de crear esta carpeta
+        cb(null, path.join(__dirname, '../uploads')); 
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Renombrar archivo
+        cb(null, Date.now() + path.extname(file.originalname)); 
     },
 });
 
 const upload = multer({ storage });
 
-// Middleware para la carga de imágenes
-exports.uploadImage = upload.single('image'); // 'image' debe coincidir con el nombre del campo en el formulario
+exports.uploadImage = upload.single('image'); 
 
-// Obtener todos los platos
 exports.getAllMenuItems = async (req, res) => {
     try {
         const menuItems = await MenuItem.find();
@@ -27,7 +25,6 @@ exports.getAllMenuItems = async (req, res) => {
     }
 };
 
-// Obtener un plato por ID
 exports.getMenuItemById = async (req, res) => {
     const { id } = req.params;
     try {
@@ -39,10 +36,9 @@ exports.getMenuItemById = async (req, res) => {
     }
 };
 
-// Crear un nuevo plato
 exports.createMenuItem = async (req, res) => {
     const { name, description, price } = req.body;
-    const image = req.file ? `/uploads/${req.file.filename}` : null; // Cambiado a la URL accesible
+    const image = req.file ? `/uploads/${req.file.filename}` : null; 
     try {
         const menuItem = new MenuItem({ name, description, price, image });
         await menuItem.save();
@@ -52,7 +48,6 @@ exports.createMenuItem = async (req, res) => {
     }
 };
 
-// Actualizar un plato
 exports.updateMenuItem = async (req, res) => {
     const { id } = req.params;
     const { name, description, price } = req.body;
@@ -66,7 +61,6 @@ exports.updateMenuItem = async (req, res) => {
     }
 };
 
-// Eliminar (desactivar) un plato
 exports.deleteMenuItem = async (req, res) => {
     const { id } = req.params;
     try {

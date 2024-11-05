@@ -14,7 +14,7 @@ const Register = () => {
   const [phone, setPhone] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext); // Usar el contexto del usuario
+  const { setUser } = useContext(UserContext); 
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -26,9 +26,8 @@ const Register = () => {
         address,
         phone,
       });
-      alert(response.data.message); // Muestra un mensaje de éxito
+      alert(response.data.message); 
 
-      // Ahora inicia sesión automáticamente
       const loginResponse = await axios.post(`${BASE_URL}/auth/login`, {
         email,
         password,
@@ -36,16 +35,13 @@ const Register = () => {
 
       const { token, user } = loginResponse.data;
 
-      // Verifica si el token y los datos de usuario están en la respuesta
       if (!token || !user) {
         throw new Error("No se encontró el token o los datos del usuario en la respuesta.");
       }
 
-      // Guarda el token en localStorage y el usuario en el contexto
       localStorage.setItem('token', token);
       setUser({ email: user.email, role: user.role });
 
-      // Redirige a la página principal
       navigate('/');
     } catch (err) {
       setError('Error al registrarse o iniciar sesión');

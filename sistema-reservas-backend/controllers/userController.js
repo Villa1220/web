@@ -1,16 +1,14 @@
 const User = require('../models/User');
 
-// Obtener todos los usuarios activos
 exports.getAllUsers = async (req, res) => {
     try {
-      const users = await User.find({ isActive: true }); // Solo usuarios activos
+      const users = await User.find({ isActive: true }); 
       res.json(users);
     } catch (error) {
       res.status(500).json({ message: 'Error al obtener usuarios', error });
     }
   };
 
-// Obtener un usuario por ID
 exports.getUserById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -22,7 +20,6 @@ exports.getUserById = async (req, res) => {
   }
 };
 
-// Actualizar un usuario
 exports.updateUser = async (req, res) => {
   const { id } = req.params;
   const { name, email, address, phone } = req.body;
@@ -36,7 +33,6 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-// Eliminar (desactivar) un usuario
 exports.deleteUser = async (req, res) => {
     const { id } = req.params;
     

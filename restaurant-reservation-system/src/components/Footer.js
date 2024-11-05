@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 
 
-
 const Footer = () => {
   return (
     <Box component="footer" className="footer">

@@ -7,7 +7,7 @@ import './Header.css';
 import { UserContext } from '../context/UserContext';
 
 const Header = () => {
-  const { user } = useContext(UserContext); // Obtiene el usuario del contexto
+  const { user } = useContext(UserContext); 
 
   return (
     <AppBar position="static" className="header" sx={{ backgroundColor: "#1c1c1c", color: "white" }}>

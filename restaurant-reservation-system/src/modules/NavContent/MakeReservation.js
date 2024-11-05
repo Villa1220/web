@@ -3,10 +3,10 @@ import axios from 'axios';
 import { BASE_URL, IMAGE_URL } from '../../config';
 import { Button, TextField, Select, MenuItem, InputLabel, FormControl, Grid, Card, CardMedia } from '@mui/material';
 import { UserContext } from '../../context/UserContext';
-import './MakeReservation.css'; // Importa el archivo CSS
+import './MakeReservation.css';
 
 const MakeReservation = () => {
-    const { user } = useContext(UserContext); // Obteniendo el usuario actual
+    const { user } = useContext(UserContext); 
     const [menuItems, setMenuItems] = useState([]);
     const [selectedMenuItems, setSelectedMenuItems] = useState({});
     const [guests, setGuests] = useState('');
@@ -36,7 +36,6 @@ const MakeReservation = () => {
         setError('');
         setSuccess('');
 
-        // Validaciones previas a la reserva
         if (!reservationDate || !guests) {
             setError('Por favor, complete todos los campos obligatorios.');
             return;
@@ -82,7 +81,7 @@ const MakeReservation = () => {
     };
 
     return (
-        <div className="make-reservation-container"> {/* Clase para el contenedor */}
+        <div className="make-reservation-container"> 
             <h2 style={{ textAlign: 'center' }}>Realiza una Reserva</h2>
 
             <br></br>
@@ -91,7 +90,7 @@ const MakeReservation = () => {
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <h3>Selecciona el Número de Invitados</h3> {/* Nueva instrucción */}
+                        <h3>Selecciona el Número de Invitados</h3> 
                         <TextField
                             label="Número de invitados"
                             type="number"
@@ -102,7 +101,7 @@ const MakeReservation = () => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <h3>Elige la Fecha de Reserva</h3> {/* Nueva instrucción */}
+                        <h3>Elige la Fecha de Reserva</h3>
                         <TextField
                             type="datetime-local"
                             value={reservationDate}
@@ -114,7 +113,7 @@ const MakeReservation = () => {
                     <Grid item xs={12}>
                         <h3>Selecciona los Platos</h3>
                         {menuItems.map((item) => (
-                            <Card key={item._id} className="menu-item-card"> {/* Clase para cada card */}
+                            <Card key={item._id} className="menu-item-card"> 
                                 <CardMedia
                                     component="img"
                                     alt={item.name}

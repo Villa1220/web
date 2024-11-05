@@ -9,7 +9,6 @@ const { authMiddleware, adminMiddleware } = require('../middleware/authMiddlewar
 
 const router = express.Router();
 
-// Rutas protegidas solo para admin
 router.get('/', authMiddleware, adminMiddleware, getAllUsers);
 router.get('/:id', authMiddleware, adminMiddleware, getUserById);
 router.put('/:id', authMiddleware, adminMiddleware, updateUser);

@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
-import { UserContext } from '../../context/UserContext'; // Importa el contexto
+import { UserContext } from '../../context/UserContext'; 
 
 const User = () => {
-  const { user } = useContext(UserContext); // Obtiene el usuario del contexto
-
+  const { user } = useContext(UserContext); 
   return (
     <div>
       <h1>Bienvenido, {user ? user.name : 'Usuario'}</h1>

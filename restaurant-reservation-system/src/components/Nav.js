@@ -2,14 +2,14 @@ import React, { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import { Box, List, ListItem, ListItemText, IconButton } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaSignOutAlt } from 'react-icons/fa'; // Importa el icono para cerrar sesión
+import { FaSignOutAlt } from 'react-icons/fa'; 
 import './Nav.css';
 
 const Nav = () => {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  if (!user) return null; // No renderiza Nav si no hay usuario
+  if (!user) return null; 
 
   const menuOptions = user.role === 'admin' 
     ? [
@@ -22,11 +22,10 @@ const Nav = () => {
         { text: 'Gestionar mis Reservas', link: '/my-reservations' },
       ];
 
-  // Función para cerrar sesión
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Elimina el token
-    setUser(null); // Reinicia el usuario en el contexto
-    navigate('/'); // Redirige a la página principal
+    localStorage.removeItem('token'); 
+    setUser(null); 
+    navigate('/'); 
   };
 
   return (

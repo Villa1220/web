@@ -18,24 +18,19 @@ const Login = () => {
     try {
       const response = await axios.post(`${BASE_URL}/auth/login`, { email, password });
 
-      // Revisa los datos que llegan en la respuesta
       console.log("Datos recibidos:", response.data);
 
       const { token, user } = response.data;
       
-      // Verifica si el token y los datos de usuario están en la respuesta
       if (!token || !user) {
         throw new Error("No se encontró el token o los datos del usuario en la respuesta.");
       }
 
-      // Guarda el token en localStorage y el usuario en el contexto
       localStorage.setItem('token', token);
       setUser({ email: user.email, role: user.role });
 
-      // Redirige a la página de inicio
       navigate('/');
     } catch (err) {
-      // Muestra el error exacto en la consola
       console.error("Error en el inicio de sesión:", err.response ? err.response.data : err.message);
       setError('Credenciales inválidas');
     }

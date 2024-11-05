@@ -18,7 +18,7 @@ import {
     Paper,
     TablePagination,
 } from '@mui/material';
-import './ManageReservation.css'; // Importar el CSS
+import './ManageReservation.css'; 
 
 const ManageReservations = () => {
     const [reservations, setReservations] = useState([]);
@@ -125,7 +125,7 @@ const ManageReservations = () => {
             setSelectedMenuItems({});
             setGuests('');
             setReservationDate('');
-            fetchReservations(); // Actualiza la lista de reservas
+            fetchReservations(); 
         } catch (error) {
             console.error('Error updating reservation:', error);
             setError('Error al actualizar la reserva. Intente de nuevo más tarde.');
@@ -143,7 +143,7 @@ const ManageReservations = () => {
                     },
                 });
                 setSuccess('Reserva cancelada exitosamente.');
-                fetchReservations(); // Refresca la lista de reservas
+                fetchReservations();
             } catch (error) {
                 console.error('Error canceling reservation:', error);
                 setError('Error al cancelar la reserva.');
@@ -156,7 +156,7 @@ const ManageReservations = () => {
                     },
                 });
                 setSuccess('Estado de la reserva actualizado exitosamente.');
-                fetchReservations(); // Refresca la lista de reservas
+                fetchReservations(); 
             } catch (error) {
                 console.error('Error updating reservation status:', error);
                 setError('Error al actualizar el estado de la reserva.');
@@ -170,11 +170,11 @@ const ManageReservations = () => {
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);  // Regresa a la primera página cuando cambia el número de filas por página
+        setPage(0); 
     };
 
     return (
-        <div className="manage-reservations-container"> {/* Clase de contenedor */}
+        <div className="manage-reservations-container"> 
             <h2>Gestión de Reservas</h2>
             {error && <p className="error-message">{error}</p>}
             {success && <p className="success-message">{success}</p>}

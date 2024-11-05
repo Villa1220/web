@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   address: { type: String, required: true },
   phone: { type: String, required: true },
   role: { type: String, enum: ['user', 'admin'], default: 'user' },
-  isActive: { type: Boolean, default: true } // Nuevo campo isActive
+  isActive: { type: Boolean, default: true }
 }, {
   timestamps: true,
 });

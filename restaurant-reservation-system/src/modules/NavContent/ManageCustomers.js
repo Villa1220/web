@@ -32,23 +32,21 @@ const ManageCustomers = () => {
     }
   };
 
-  // Manejar los cambios en el formulario
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Lógica para registrar o actualizar usuario/administrador
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
       if (editingUserId) {
-        // Si estamos editando, excluir contraseña y usar PUT
         const { password, ...updatedForm } = form;
         await axios.put(`${BASE_URL}/users/${editingUserId}`, updatedForm, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
       } else {
-        // Si estamos agregando nuevo usuario o admin
         let response;
         if (form.role === 'admin') {
           response = await axios.post(`${BASE_URL}/auth/register-admin`, { ...form, adminKey: ADMIN_KEY });
@@ -63,7 +61,6 @@ const ManageCustomers = () => {
     }
   };
 
-  // Restablecer el formulario
   const resetForm = () => {
     setForm({ name: '', email: '', address: '', phone: '', role: 'user', password: '' });
     setEditingUserId(null);
@@ -71,7 +68,6 @@ const ManageCustomers = () => {
     setError('');
   };
 
-  // Manejo de eliminación de usuario
   const handleDeleteUser = async (id) => {
     try {
       await axios.delete(`${BASE_URL}/users/${id}`, {
@@ -83,7 +79,6 @@ const ManageCustomers = () => {
     }
   };
 
-  // Abrir el modal para editar o agregar usuario
   const openModal = (user = null) => {
     if (user) {
       setEditingUserId(user._id);
@@ -94,7 +89,6 @@ const ManageCustomers = () => {
     setShowModal(true);
   };
 
-  // Cambiar de página
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
   };
@@ -155,8 +149,7 @@ const ManageCustomers = () => {
         breakLinkClassName={'page-link'}
         activeClassName={'active'}
       />
-
-      {/* Modal para agregar o editar usuario */}
+      
       <Modal show={showModal} onHide={resetForm}>
         <Modal.Header closeButton>
           <Modal.Title>{editingUserId ? 'Editar Usuario' : 'Agregar Usuario'}</Modal.Title>

@@ -2,12 +2,11 @@ const Reservation = require('../models/Reservation');
 const ReservationDetail = require('../models/ReservationDetail');
 const MenuItem = require('../models/MenuItem');
 
-// Crear una reserva
+
 exports.createReservation = async (req, res) => {
     const { reservationDate, guests, menuItems } = req.body;
     const userId = req.user.userId;
 
-    // Validaciones de entrada
     if (!reservationDate || !guests || !Array.isArray(menuItems) || menuItems.length === 0) {
         return res.status(400).json({ message: 'Datos de reserva incompletos o inválidos.' });
     }
@@ -40,7 +39,6 @@ exports.createReservation = async (req, res) => {
     }
 };
 
-// Obtener todas las reservas del usuario
 exports.getUserReservations = async (req, res) => {
     const userId = req.user.userId;
 
@@ -56,7 +54,6 @@ exports.getUserReservations = async (req, res) => {
     }
 };
 
-// Obtener todas las reservas con filtros
 exports.getAllReservations = async (req, res) => {
     const { startDate, endDate, userId } = req.query;
 
@@ -82,7 +79,6 @@ exports.getAllReservations = async (req, res) => {
     }
 };
 
-// Modificar una reserva (incluyendo detalles)
 exports.updateReservation = async (req, res) => {
     const { id } = req.params;
     const { reservationDate, guests, menuItems } = req.body;
@@ -111,7 +107,6 @@ exports.updateReservation = async (req, res) => {
     }
 };
 
-// Cancelar una reserva
 exports.cancelReservation = async (req, res) => {
     const { id } = req.params;
 
@@ -128,7 +123,6 @@ exports.cancelReservation = async (req, res) => {
     }
 };
 
-// Actualizar el estado de una reserva
 exports.updateReservationStatus = async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
@@ -143,22 +137,18 @@ exports.updateReservationStatus = async (req, res) => {
     }
 };
 
-// Eliminar una reserva
 exports.deleteReservation = async (req, res) => {
   const { id } = req.params;
 
   try {
-      // Verifica si la reserva existe y si su estado es 'pending'
       const reservation = await Reservation.findById(id);
       if (!reservation) return res.status(404).json({ message: 'Reserva no encontrada' });
       if (reservation.status !== 'pending') {
           return res.status(400).json({ message: 'Solo se pueden cancelar reservas pendientes.' });
       }
-
-      // Cambia el estado de la reserva a 'canceled' en lugar de eliminarla
       reservation.status = 'canceled';
-      await reservation.save(); // Guarda los cambios en la reserva
-      await ReservationDetail.deleteMany({ reservation: id }); // Elimina los detalles de la reserva
+      await reservation.save(); 
+      await ReservationDetail.deleteMany({ reservation: id }); 
 
       res.status(200).json({ message: 'Reserva cancelada exitosamente.' });
   } catch (error) {
@@ -167,7 +157,6 @@ exports.deleteReservation = async (req, res) => {
   }
 };
 
-// Editar una reserva
 exports.editReservation = async (req, res) => {
     const { id } = req.params;
     const updates = req.body;

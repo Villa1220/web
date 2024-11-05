@@ -1,4 +1,3 @@
-// authMiddleware.js
 const jwt = require('jsonwebtoken');
 
 const authMiddleware = (req, res, next) => {
@@ -7,14 +6,13 @@ const authMiddleware = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // Almacena el usuario decodificado en la solicitud
+    req.user = decoded;
     next();
   } catch (error) {
     res.status(400).json({ message: 'Token inválido' });
   }
 };
 
-// Middleware para verificar si el usuario es admin
 const adminMiddleware = (req, res, next) => {
   if (req.user.role !== 'admin') {
     return res.status(403).json({ message: 'Acceso denegado, se requieren privilegios de administrador' });

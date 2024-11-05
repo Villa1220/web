@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Button, Form, Modal } from 'react-bootstrap';
 import { BASE_URL, IMAGE_URL } from '../../config'; 
-import './ManageMenu.css'; // Importa el archivo CSS
+import './ManageMenu.css';
 
 const ManageMenu = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -15,7 +15,6 @@ const ManageMenu = () => {
     fetchMenuItems();
   }, []);
 
-  // Obtener los elementos del menú
   const fetchMenuItems = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/menu`, {
@@ -27,18 +26,15 @@ const ManageMenu = () => {
     }
   };
 
-  // Manejar cambios en el formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Manejar cambios de archivos
   const handleFileChange = (e) => {
     setForm((prev) => ({ ...prev, image: e.target.files[0] }));
   };
 
-  // Manejar el envío del formulario
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -66,7 +62,6 @@ const ManageMenu = () => {
     }
   };
 
-  // Restablecer el formulario
   const resetForm = () => {
     setForm({ name: '', description: '', price: '', image: null });
     setEditingItemId(null);
@@ -74,14 +69,12 @@ const ManageMenu = () => {
     setError('');
   };
 
-  // Manejar la edición de un elemento del menú
   const handleEdit = (item) => {
     setForm({ name: item.name, description: item.description, price: item.price, image: null });
     setEditingItemId(item._id);
     setShowModal(true);
   };
 
-  // Manejar la eliminación de un elemento del menú
   const handleDelete = async (id) => {
     if (window.confirm('¿Estás seguro de que deseas eliminar este plato?')) {
       try {
@@ -97,7 +90,6 @@ const ManageMenu = () => {
 
   return (
     <>
-      {/* Encabezado de gestión del menú */}
       <div className="manage-menu-nav">
         <h2>Gestión de Menú</h2>
         <Button className="add-user-button" onClick={() => setShowModal(true)}>Agregar Nuevo Plato</Button>
@@ -125,7 +117,7 @@ const ManageMenu = () => {
                 <td>
                   {item.image ? (
                     <img
-                      src={`${IMAGE_URL}${item.image}`} // Asegurarse que la URL no tenga barras duplicadas
+                      src={`${IMAGE_URL}${item.image}`}
                       alt={item.name}
                       style={{ width: '50px', height: '50px' }}
                     />
@@ -143,7 +135,6 @@ const ManageMenu = () => {
         </Table>
       </div>
 
-      {/* Modal para agregar o editar menú */}
       <Modal show={showModal} onHide={resetForm}>
         <Modal.Header closeButton>
           <Modal.Title>{editingItemId ? 'Editar Plato' : 'Agregar Plato'}</Modal.Title>

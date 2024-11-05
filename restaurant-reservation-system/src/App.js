@@ -11,7 +11,6 @@ import Register from './modules/User/Register';
 import Nav from './components/Nav'; 
 import { UserContext } from './context/UserContext';
 
-// Importa los componentes de cada módulo de navegación
 import MakeReservation from './modules/NavContent/MakeReservation';
 import ManageCustomers from './modules/NavContent/ManageCustomers';
 import ManageMenu from './modules/NavContent/ManageMenu';
@@ -21,7 +20,6 @@ import MyReservations from './modules/NavContent/MyReservations';
 function App() {
   const { user } = useContext(UserContext);
 
-  // Componente de ruta protegida
   const ProtectedRoute = ({ children, role }) => {
     if (!user) return <Navigate to="/user" />;
     if (role && user.role !== role) return <Navigate to="/" />;
@@ -31,10 +29,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* Header siempre se muestra */}
         <Header />
-        
-        {/* Nav solo se muestra si el usuario ha iniciado sesión */}
         {user && <Nav />}
         
         <Routes>
@@ -45,7 +40,6 @@ function App() {
           <Route path="/user" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* Rutas protegidas para administradores */}
           <Route 
             path="/manage-customers" 
             element={
@@ -71,7 +65,6 @@ function App() {
             } 
           />
 
-          {/* Rutas protegidas para usuarios */}
           <Route 
             path="/make-reservation" 
             element={

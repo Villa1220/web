@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const ReservationDetail = require('../models/ReservationDetail');
 
-// Crear un detalle de reserva
 router.post('/', async (req, res) => {
     try {
         const reservationDetail = new ReservationDetail(req.body);
@@ -13,7 +12,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Actualizar un detalle de reserva
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
     const updates = req.body;

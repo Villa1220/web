@@ -6,14 +6,14 @@
 }
 
 .nav .MuiList-root {
-  padding: 0!important; /* Sin padding para la lista */
-  display:flex!important; /* Para que los elementos estén en fila */
-  justify-content: center!important; /* Centra los elementos en el contenedor */
-  margin: 1.5px!important; /* Sin margen para la lista */
+  padding: 0!important; 
+  display:flex!important; 
+  justify-content: center!important;
+  margin: 1.5px!important; 
 }
 
 .nav .MuiListItem-root {
-  padding: 5px 5px!important; /* Padding para los elementos de la lista */
+  padding: 5px 5px!important; 
 }
 
 .nav a {
@@ -21,10 +21,10 @@
   color: white!important; 
   padding: 12px 20px!important; 
   border-radius: 8px!important; 
-  font-weight: bold!important; /* Cambiado a 'bold' para aplicar negrita */
+  font-weight: bold!important; 
   transition: background-color 0.3s ease, transform 0.3s ease!important; 
   margin: 0 5px!important; 
-  font-size: x-large!important; /* Manteniendo tamaño de fuente grande */
+  font-size: x-large!important; 
 }
 
 

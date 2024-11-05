@@ -47,7 +47,6 @@ const MyReservations = () => {
                 setReservations(response.data.reservations);
                 setReservationDetails(response.data.reservationDetails);
             } catch (error) {
-                console.error('Error fetching reservations:', error);
                 setError('Error al cargar las reservas. Intente de nuevo más tarde.');
             }
         };
@@ -57,7 +56,6 @@ const MyReservations = () => {
                 const response = await axios.get(`${BASE_URL}/menu`);
                 setMenuItems(response.data);
             } catch (error) {
-                console.error('Error fetching menu items:', error);
                 setError('Error al cargar los platos. Intente de nuevo más tarde.');
             }
         };
@@ -74,7 +72,6 @@ const MyReservations = () => {
             });
             setReservations(reservations.filter((reservation) => reservation._id !== id));
         } catch (error) {
-            console.error('Error cancelling reservation:', error);
             setError('Error al cancelar la reserva. Intente de nuevo más tarde.');
         }
     };
@@ -133,7 +130,6 @@ const MyReservations = () => {
 
             handleCloseModal();
         } catch (error) {
-            console.error('Error updating reservation:', error);
             setError('Error al actualizar la reserva. Intente de nuevo más tarde.');
         }
     };
@@ -143,7 +139,7 @@ const MyReservations = () => {
     };
 
     return (
-        <div className="my-reservations-container"> {/* Aplicar clase para centrar contenido */}
+        <div className="my-reservations-container">
             <h2>Mis Reservas</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <TableContainer component={Paper} className="table-container">
@@ -201,7 +197,6 @@ const MyReservations = () => {
                 </Table>
             </TableContainer>
 
-            {/* Modal para editar reserva */}
             <Dialog open={editModalOpen} onClose={handleCloseModal}>
                 <DialogTitle>Editar Reserva</DialogTitle>
                 <DialogContent>
@@ -229,7 +224,7 @@ const MyReservations = () => {
                         <Grid item xs={12}>
                             <h3>Selecciona los Platos</h3>
                             {menuItems.map((item) => (
-                                <Card key={item._id} className="card"> {/* Aplicar clase de tarjeta */}
+                                <Card key={item._id} className="card">
                                     <CardMedia
                                         component="img"
                                         alt={item.name}
