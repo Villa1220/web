@@ -15,6 +15,14 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!emailRegex.test(email)) {
+      setError('Por favor, ingresa un correo electrónico válido.');
+      return;
+    }
+
     try {
       const response = await axios.post(`${BASE_URL}/auth/login`, { email, password });
 
@@ -48,7 +56,10 @@ const Login = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Ingrese su correo"
             required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            title="Ingresa un correo electrónico válido."
           />
         </div>
         <div className="form-group">
@@ -58,6 +69,7 @@ const Login = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Ingresa tu contraseña"
             required
           />
         </div>

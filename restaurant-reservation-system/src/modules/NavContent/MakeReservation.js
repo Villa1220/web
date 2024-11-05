@@ -36,8 +36,18 @@ const MakeReservation = () => {
         setError('');
         setSuccess('');
 
-        if (!reservationDate || !guests) {
+        // Validación de campos vacíos
+        if (!reservationDate || !guests || parseInt(guests, 10) <= 0) {
             setError('Por favor, complete todos los campos obligatorios.');
+            return;
+        }
+
+        // Validar que la fecha de reserva no sea en el pasado
+        const currentDateTime = new Date();
+        const selectedDateTime = new Date(reservationDate);
+
+        if (selectedDateTime < currentDateTime) {
+            setError('La fecha de reserva no puede ser en el pasado.');
             return;
         }
 
@@ -96,8 +106,10 @@ const MakeReservation = () => {
                             type="number"
                             value={guests}
                             onChange={(e) => setGuests(e.target.value)}
+                            placeholder="Ejemplo: 4"
                             fullWidth
                             required
+                            inputProps={{ min: 1 }}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -108,6 +120,14 @@ const MakeReservation = () => {
                             onChange={(e) => setReservationDate(e.target.value)}
                             fullWidth
                             required
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            InputProps={{
+                                inputProps: {
+                                    min: new Date().toISOString().slice(0, 16) // Fecha mínima: actual
+                                }
+                            }}
                         />
                     </Grid>
                     <Grid item xs={12}>

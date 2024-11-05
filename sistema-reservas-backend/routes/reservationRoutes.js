@@ -9,7 +9,7 @@ const {
     deleteReservation,
     editReservation
 } = require('../controllers/reservationController');
-const { authMiddleware, adminMiddleware } = require('../middlewares/authMiddleware');
+const { authMiddleware, adminMiddleware } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
@@ -19,6 +19,7 @@ router.get('/admin', adminMiddleware, getAllReservations);
 router.put('/:id', authMiddleware, updateReservation);
 router.delete('/:id', authMiddleware, cancelReservation);
 
+// Admin routes
 router.put('/admin/:id/status', adminMiddleware, updateReservationStatus); 
 router.delete('/admin/:id', adminMiddleware, deleteReservation); 
 router.put('/admin/edit/:id', adminMiddleware, editReservation); 

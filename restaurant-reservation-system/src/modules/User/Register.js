@@ -14,11 +14,41 @@ const Register = () => {
   const [phone, setPhone] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext); 
+  const { setUser } = useContext(UserContext);
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
+    // Validar que todos los campos estén llenos
+    if (!name || !email || !password || !address || !phone) {
+      setError('Por favor, complete todos los campos.');
+      return;
+    }
+
     try {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phoneRegex = /^09\d{8}$/;
+      const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+
+      // Validar formato de correo electrónico
+      if (!emailRegex.test(email)) {
+        setError('Por favor, ingresa un correo electrónico válido.');
+        return;
+      }
+
+      // Validar formato de teléfono
+      if (!phoneRegex.test(phone)) {
+        setError('Por favor, ingresa un número de teléfono válido (Ejemplo: 0984266777).');
+        return;
+      }
+
+      // Validar formato del nombre (solo letras y espacios)
+      if (!nameRegex.test(name)) {
+        setError('El nombre completo solo puede contener letras y espacios.');
+        return;
+      }
+
+      // Enviar datos al servidor
       const response = await axios.post(`${BASE_URL}/auth/register`, {
         name,
         email,
@@ -26,8 +56,9 @@ const Register = () => {
         address,
         phone,
       });
-      alert(response.data.message); 
+      alert(response.data.message);
 
+      // Iniciar sesión automáticamente después del registro
       const loginResponse = await axios.post(`${BASE_URL}/auth/login`, {
         email,
         password,
@@ -60,7 +91,10 @@ const Register = () => {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            placeholder="Ingresa tu nombre completo"
             required
+            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+"
+            title="El nombre solo puede contener letras y espacios."
           />
         </div>
         <div className="form-group">
@@ -70,7 +104,10 @@ const Register = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="ejemplo@dominio.com"
             required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            title="Ingresa un correo electrónico válido."
           />
         </div>
         <div className="form-group">
@@ -80,6 +117,7 @@ const Register = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Crea una contraseña segura"
             required
           />
         </div>
@@ -90,17 +128,21 @@ const Register = () => {
             id="address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
+            placeholder="Ingresa tu dirección"
             required
           />
         </div>
         <div className="form-group">
           <label htmlFor="phone">Teléfono</label>
           <input
-            type="text"
+            type="tel"
             id="phone"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
+            placeholder="Ingrese un número de teléfono"
             required
+            pattern="09\d{8}"
+            title="Ingresa un número de teléfono ecuatoriano válido. Ejemplo: 0984266777."
           />
         </div>
         <button type="submit" className="register-button">Registrarse</button>

@@ -24,7 +24,6 @@ import {
     Card,
     CardMedia,
 } from '@mui/material';
-import './MyReservations.css'; 
 
 const MyReservations = () => {
     const [reservations, setReservations] = useState([]);
@@ -42,11 +41,15 @@ const MyReservations = () => {
             try {
                 const token = localStorage.getItem('token');
                 const response = await axios.get(`${BASE_URL}/reservations`, {
-                    headers: { Authorization: `Bearer ${token}` },
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
+
                 setReservations(response.data.reservations);
                 setReservationDetails(response.data.reservationDetails);
             } catch (error) {
+                console.error('Error fetching reservations:', error);
                 setError('Error al cargar las reservas. Intente de nuevo más tarde.');
             }
         };
@@ -56,6 +59,7 @@ const MyReservations = () => {
                 const response = await axios.get(`${BASE_URL}/menu`);
                 setMenuItems(response.data);
             } catch (error) {
+                console.error('Error fetching menu items:', error);
                 setError('Error al cargar los platos. Intente de nuevo más tarde.');
             }
         };
@@ -68,10 +72,13 @@ const MyReservations = () => {
         try {
             const token = localStorage.getItem('token');
             await axios.delete(`${BASE_URL}/reservations/${id}`, {
-                headers: { Authorization: `Bearer ${token}` },
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
             setReservations(reservations.filter((reservation) => reservation._id !== id));
         } catch (error) {
+            console.error('Error cancelling reservation:', error);
             setError('Error al cancelar la reserva. Intente de nuevo más tarde.');
         }
     };
@@ -79,12 +86,12 @@ const MyReservations = () => {
     const handleEditReservation = (reservation) => {
         setSelectedReservation(reservation);
         setGuests(reservation.guests);
-        setReservationDate(reservation.reservationDate);
-
+        // Formatear la fecha a 'YYYY-MM-DDTHH:mm' para el input datetime-local
+        setReservationDate(new Date(reservation.reservationDate).toISOString().slice(0, 16));
         const menuItemsToSelect = getReservationMenuItems(reservation._id);
         const items = {};
         menuItemsToSelect.forEach((item) => {
-            items[item.menuItem] = item.quantity;
+            items[item.menuItem._id] = item.quantity;
         });
         setSelectedMenuItems(items);
         setEditModalOpen(true);
@@ -99,7 +106,12 @@ const MyReservations = () => {
     };
 
     const getReservationMenuItems = (reservationId) => {
-        return reservationDetails.filter((detail) => detail.reservation === reservationId);
+        return reservationDetails
+            .filter((detail) => detail.reservation === reservationId)
+            .map((detail) => ({
+                menuItem: detail.menuItem,
+                quantity: detail.quantity,
+            }));
     };
 
     const handleUpdateReservation = async () => {
@@ -121,15 +133,16 @@ const MyReservations = () => {
                 }
             );
 
+            // Actualizar la tabla con la nueva información de la reserva
             setReservations(reservations.map((reservation) => {
                 if (reservation._id === selectedReservation._id) {
-                    return { ...reservation, ...response.data };
+                    return { ...reservation, ...response.data }; 
                 }
                 return reservation;
             }));
-
             handleCloseModal();
         } catch (error) {
+            console.error('Error updating reservation:', error);
             setError('Error al actualizar la reserva. Intente de nuevo más tarde.');
         }
     };
@@ -139,34 +152,34 @@ const MyReservations = () => {
     };
 
     return (
-        <div className="my-reservations-container">
+        <div>
             <h2>Mis Reservas</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            <TableContainer component={Paper} className="table-container">
+            <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell className="table-cell">Fecha de Reserva</TableCell>
-                            <TableCell className="table-cell">Número de Invitados</TableCell>
-                            <TableCell className="table-cell">Estado</TableCell>
-                            <TableCell className="table-cell">Platos</TableCell>
-                            <TableCell className="table-cell">Acciones</TableCell>
+                            <TableCell>Fecha de Reserva</TableCell>
+                            <TableCell>Número de Invitados</TableCell>
+                            <TableCell>Estado</TableCell>
+                            <TableCell>Platos</TableCell>
+                            <TableCell>Acciones</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {reservations.map((reservation) => (
                             <TableRow key={reservation._id}>
-                                <TableCell className="table-cell">{new Date(reservation.reservationDate).toLocaleString()}</TableCell>
-                                <TableCell className="table-cell">{reservation.guests}</TableCell>
-                                <TableCell className="table-cell">{reservation.status}</TableCell>
-                                <TableCell className="table-cell">
+                                <TableCell>{new Date(reservation.reservationDate).toLocaleString()}</TableCell>
+                                <TableCell>{reservation.guests}</TableCell>
+                                <TableCell>{reservation.status}</TableCell>
+                                <TableCell>
                                     {getReservationMenuItems(reservation._id).length > 0 ? (
                                         getReservationMenuItems(reservation._id).map((item) => (
-                                            <div key={item.menuItem} style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
-                                                <Avatar
-                                                    src={`${IMAGE_URL}${item.menuItem.image}`}
-                                                    alt={item.menuItem.name}
-                                                    style={{ marginRight: '10px' }}
+                                            <div key={item.menuItem._id} style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
+                                                <Avatar 
+                                                    src={`${IMAGE_URL}${item.menuItem.image}`} 
+                                                    alt={item.menuItem.name} 
+                                                    style={{ marginRight: '10px' }} 
                                                 />
                                                 <span>{item.menuItem.name} (x{item.quantity})</span>
                                             </div>
@@ -175,7 +188,7 @@ const MyReservations = () => {
                                         <div>No hay platos en esta reserva.</div>
                                     )}
                                 </TableCell>
-                                <TableCell className="table-cell">
+                                <TableCell>
                                     <Button
                                         variant="contained"
                                         color="primary"
@@ -196,7 +209,7 @@ const MyReservations = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-
+            {/* Modal para editar reserva */}
             <Dialog open={editModalOpen} onClose={handleCloseModal}>
                 <DialogTitle>Editar Reserva</DialogTitle>
                 <DialogContent>
@@ -224,7 +237,7 @@ const MyReservations = () => {
                         <Grid item xs={12}>
                             <h3>Selecciona los Platos</h3>
                             {menuItems.map((item) => (
-                                <Card key={item._id} className="card">
+                                <Card key={item._id} style={{ marginBottom: '1rem', padding: '1rem', display: 'flex', alignItems: 'center' }}>
                                     <CardMedia
                                         component="img"
                                         alt={item.name}
@@ -256,12 +269,8 @@ const MyReservations = () => {
                     </Grid>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCloseModal} color="primary">
-                        Cancelar
-                    </Button>
-                    <Button onClick={handleUpdateReservation} color="primary">
-                        Guardar Cambios
-                    </Button>
+                    <Button onClick={handleCloseModal} color="primary">Cancelar</Button>
+                    <Button onClick={handleUpdateReservation} color="primary">Actualizar</Button>
                 </DialogActions>
             </Dialog>
         </div>
